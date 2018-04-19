@@ -1,25 +1,32 @@
 import axios from 'axios';
-import env from '../../build/env';
+// import env from '../../build/env';
 import semver from 'semver';
 import packjson from '../../package.json';
+import Cookies from 'js-cookie';
 
-let util = {
-
-};
+let util = {};
 util.title = function (title) {
     title = title || 'iView admin';
     window.document.title = title;
 };
 
-const ajaxUrl = env === 'development'
-    ? 'http://127.0.0.1:8888'
-    : env === 'production'
-        ? 'https://www.url.com'
-        : 'https://debug.url.com';
+const ajaxUrl = 'http://127.0.0.1:8080';
 
 util.ajax = axios.create({
     baseURL: ajaxUrl,
     timeout: 30000
+});
+
+// 請求攔截器
+util.ajax.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    if (Cookies.get('TokenKey')) {
+        config.headers['Authorization'] = ' Token ' + Cookies.get('TokenKey'); // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
+    }
+    return config;
+}, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error);
 });
 
 util.inOf = function (arr, targetArr) {

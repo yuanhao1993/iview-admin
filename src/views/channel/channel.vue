@@ -47,7 +47,27 @@
                     },
                     {
                         title: 'h5链接',
-                        key: 'link_h5'
+                        key: 'link_h5',
+                        ellipsis: true,
+                        render: (h, {row, column, index}) => {
+                            return h('span', {
+                                attrs: {
+                                    title: row.link_h5
+                                },
+                                on: {
+                                    click: () => {
+                                        const input = document.createElement('input');
+                                        document.body.appendChild(input);
+                                        input.setAttribute('value', row.link_h5);
+                                        input.select();
+                                        if (document.execCommand('copy')) {
+                                            document.execCommand('copy');
+                                            this.$Message.success('复制成功!');
+                                        }
+                                    }
+                                }
+                            }, row.link_h5);
+                        }
                     },
                     {
                         title: '认证方式',

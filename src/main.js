@@ -8,9 +8,10 @@ import '@/locale';
 import 'iview/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
 import util from './libs/util';
-
+import VueClipboard from 'vue-clipboard2';
 Vue.use(VueI18n);
 Vue.use(iView);
+Vue.use(VueClipboard);
 
 new Vue({
     el: '#app',

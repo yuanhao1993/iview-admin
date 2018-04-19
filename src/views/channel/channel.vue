@@ -123,10 +123,18 @@
                 this.getlist(index - 1);
             },
             editData(index) {
-                alert(`修改${index}`);
+                alert(`修改${this.data[index].id}`);
             },
             delData(index) {
-                alert(`删除${index}`);
+                this.$Modal.confirm({
+                    title: '提示',
+                    content: `<p>您确定要删除 <b>${this.data[index].name}</b> 数据</p>`,
+                    onOk: () => {
+                        this.data.splice(index, 1);
+                        this.$Message.info('删除成功');
+                    },
+                    onCancel: () => {}
+                });
             }
         },
         mounted() {

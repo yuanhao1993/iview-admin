@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import env from '../../build/env';
+import env from '../../build/env';
 import semver from 'semver';
 import packjson from '../../package.json';
 import Cookies from 'js-cookie';
@@ -9,8 +9,13 @@ util.title = function (title) {
     title = title || 'iView admin';
     window.document.title = title;
 };
+let ajaxUrl = '';
 
-const ajaxUrl = 'http://127.0.0.1:8080';
+if (env === 'development') {
+    ajaxUrl = 'http://47.94.133.188:8000';
+} else {
+    ajaxUrl = 'http://127.0.0.1:8080';
+}
 
 util.ajax = axios.create({
     baseURL: ajaxUrl,

@@ -1,9 +1,8 @@
 <!--suppress ALL -->
 <template>
     <div class="channel">
-        <Table :columns="columns1" :data="data1"></Table>
+        <Table :loading="dataLoading" :columns="columns" :data="data"></Table>
         <Page :total="100" @on-change="pageChange"></Page>
-
     </div>
 </template>
 
@@ -14,7 +13,9 @@
         name: 'channel-table',
         data() {
             return {
-                columns1: [
+                dataLoading: true,
+                data: [],
+                columns: [
                     {
                         title: 'ID',
                         key: 'id'
@@ -35,8 +36,8 @@
                         title: '创建时间',
                         key: 'create_time'
                     }
-                ],
-                data1: []
+                ]
+
             };
         },
         created() {
@@ -44,18 +45,30 @@
         },
         methods: {
             getlist(index) {
-                fetchchannel({"limit": 10, "offset": 10 * index}).then(res => {
-                    this.data1 = res.data.results;
-                }).catch();
+                this.dataLoading = true
+                fetchchannel({"limit": 10, "offset": 10 * index})
+                    .then(res => {
+                        let result = res.data.results.map(item => {
+                            let check_ways = item.check_ways_get.map(item => item.name);
+                            return {
+                                ...item,
+                                check_ways: check_ways.join(', ')
+                            }
+                        })
+                        this.data = result;
+                        this.dataLoading = false;
+                    }).catch();
             },
             pageChange(index) {
-                console.log(index - 1);
                 this.getlist(index - 1);
             }
         }
     };
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    .channel{
+        height: 100%;
 
+    }
 </style>

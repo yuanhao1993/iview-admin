@@ -59,11 +59,12 @@
             };
         },
         methods: {
-            handleSubmit () {
+            handleSubmit() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
                         login(this.form)
                             .then(response => {
+                                console.log(response)
                                 Cookies.set('TokenKey', response.data.token);
                                 this.$store.commit(
                                     'setAvator',
@@ -77,7 +78,7 @@
                             })
                             .catch(err => {
                                 console.log('error');
-                                console.log(err.response.data);
+                                console.log(err);
                             });
                     }
                 });

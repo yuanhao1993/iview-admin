@@ -10,7 +10,7 @@ util.title = function (title) {
     window.document.title = title;
 };
 
-const ajaxUrl = 'http://47.94.133.188:8000';
+const ajaxUrl = 'http://127.0.0.1:8080';
 
 util.ajax = axios.create({
     baseURL: ajaxUrl,

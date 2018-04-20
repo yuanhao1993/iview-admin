@@ -107,6 +107,22 @@ export const appRouter = [
             }
         ]
     },
+  {
+    path: '/staff-list',
+    icon: 'lock-combination',
+    title: '员工管理',
+    name: 'staff-list',
+    access: 0,
+    component: Main,
+    children: [
+      {
+        path: 'index',
+        title: '员工管理',
+        name: 'staff_index',
+        component: () => import('@/views/staff/staff.vue')
+      }
+    ]
+  },
     {
         path: '/access-test',
         icon: 'lock-combination',

@@ -133,8 +133,8 @@
                         return {
                             ...item,
                             check_ways: checkWays.join(', ')
-                        }
-                    })
+                        };
+                    });
                     this.data = result;
                     this.dataLoading = false;
                 }).catch();
@@ -153,7 +153,8 @@
                         this.data.splice(index, 1);
                         this.$Message.info('删除成功');
                     },
-                    onCancel: () => {}
+                    onCancel: () => {
+                    }
                 });
             }
         },

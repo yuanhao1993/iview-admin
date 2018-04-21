@@ -1,5 +1,5 @@
 <style scoped lang="less">
-    .channel {
+    .customermodel {
         height: 100%;
         overflow: auto;
         .from {
@@ -7,10 +7,9 @@
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
-            .search__input{
+            .search__input {
                 width: 370px;
             }
-
         }
         .page {
             padding: 20px 0;
@@ -18,79 +17,35 @@
     }
 </style>
 <template>
-    <div class="channel" ref="channel">
+    <div class="customermodel" ref="channel">
         <div class="from" ref="search">
             <div class="search__input">
                 <Input v-model="searchText" placeholder="请输入搜索内容..." @on-change="getlist(0)"/>
             </div>
             <div class="search__btn">
-                <i-button @click="newUser" type="primary">新增</i-button>
+                <i-button @click="newUser" type="primary">加入黑名单</i-button>
             </div>
         </div>
 
-        <Table class="table" :height.sync="tableHeight" :loading="dataLoading" :columns="columns"
+        <Table class="table"
+               :height.sync="tableHeight"
+               :loading="dataLoading"
+               :columns="columns"
                :data="dataList">
         </Table>
+
         <Row type="flex" justify="end">
             <Col span="12" class="margin-bottom-20">
-            <div class="page" ref="page">
-                <Page :total="total" @on-change="pageChange"></Page>
-            </div>
+                <div class="page" ref="page">
+                    <Page :total="total" @on-change="pageChange"></Page>
+                </div>
             </Col>
         </Row>
-        <Modal
-                v-model="newUserFlag"
-                title="客户基本信息"
-                @on-ok="confirmUser"
-                @on-cancel="cancelUser">
-            <div>
-                <i-form :model="newform" :rules="ruleValidate" :label-width="80">
-                    <Form-item label="渠道名称" prop="name">
-                        <i-input v-model="newform.name" placeholder="请输入渠道名称"></i-input>
-                    </Form-item>
-                    <Form-item label="认证方式">
-                        <i-select v-model="newform.check_ways" multiple placeholder="请选择(支持多选)">
-                            <i-option
-                                    v-for="item in checkways"
-                                    :value="item.id"
-                                    :key="item.id"
-                            >
-                                {{ item.name}}
-                            </i-option>
-                        </i-select>
-                    </Form-item>
-                </i-form>
-            </div>
-        </Modal>
-        <Modal
-                v-model="editUserFlag"
-                title="修改客户基本信息"
-                @on-ok="confirmEdit(editChaId)"
-                @on-cancel="cancelEdit">
-            <div>
-                <i-form :model="editform" :rules="ruleValidate" :label-width="80">
-                    <Form-item label="渠道名称" prop="name">
-                        <i-input v-model="editform.name" placeholder="请输入渠道名称"></i-input>
-                    </Form-item>
-                    <Form-item label="认证方式">
-                        <i-select v-model="editform.check_ways" multiple placeholder="请选择(支持多选)">
-                            <i-option
-                                    v-for="item in checkways"
-                                    :value="item.id"
-                                    :key="item.id"
-                            >
-                                {{ item.name}}
-                            </i-option>
-                        </i-select>
-                    </Form-item>
-                </i-form>
-            </div>
-        </Modal>
     </div>
 </template>
 
 <script>
-    import {fetchchannel, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/channel'
+    import {fetch, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/customer';
 
     export default {
         name: 'channel-table',
@@ -119,39 +74,79 @@
                     },
                     {
                         title: '渠道名称',
+                        key: 'channel__name'
+                    },
+                    {
+                        title: '姓名',
                         key: 'name'
                     },
                     {
-                        title: 'h5链接',
-                        key: 'link_h5',
-                        ellipsis: true,
+                        title: '电话',
+                        key: 'tel'
+                    },
+                    {
+                        title: '微信',
+                        key: 'wechat'
+                    },
+                    {
+                        title: '身份证号',
+                        key: 'identity'
+                    },
+                    {
+                        title: '芝麻信用分',
+                        key: 'zhima_score'
+                    },
+                    {
+                        title: '审核人',
+                        key: 'audit_user'
+                    },
+                    {
+                        title: '放款人',
+                        key: 'loan_user"'
+                    },
+                    {
+                        title: '追款人',
+                        key: 'urge_user"'
+                    },
+                    {
+                        title: '审核状态',
+                        key: 'audit_status',
                         render: (h, {row, column, index}) => {
+                            let status = '待审核';
+                            switch (row.audit_status) {
+                                case 1:
+                                    status = '待审核';
+                                    break;
+                                case 2:
+                                    status = '拒绝受理';
+                                    break;
+                                case 3:
+                                    status = '审核通过';
+                                    break;
+                                case 4:
+                                    status = '需要复审';
+                                    break;
+                                case 5:
+                                    status = '已放款';
+                                    break;
+                                case 6:
+                                    status = '续期';
+                                    break;
+                                case 7:
+                                    status = '结清';
+                                    break;
+
+                            }
                             return h('span', {
                                 attrs: {
-                                    title: row.link_h5
-                                },
-                                on: {
-                                    click: () => {
-                                        const input = document.createElement('input');
-                                        document.body.appendChild(input);
-                                        input.setAttribute('value', row.link_h5);
-                                        input.select();
-                                        if (document.execCommand('copy')) {
-                                            document.execCommand('copy');
-                                            this.$Message.success('复制成功!');
-                                        }
-                                    }
+                                    title: status
                                 }
-                            }, row.link_h5);
+                            }, status);
                         }
                     },
                     {
-                        title: '认证方式',
-                        key: 'check_ways'
-                    },
-                    {
-                        title: '创建时间',
-                        key: 'create_time'
+                        title: '申请时间',
+                        key: 'zhima_score'
                     },
                     {
                         title: '操作',
@@ -170,35 +165,20 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.editData(params.row.id);
+                                            this.$router.push({
+                                                name: 'customer_desc',
+                                                params: {
+                                                    id: params.row.id
+                                                }
+                                            });
                                         }
                                     }
-                                }, '修改'),
-                                h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        size: 'small'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.delData(params.row.id);
-                                        }
-                                    }
-                                }, '删除')
+                                }, '查看详情')
                             ]);
                         }
                     }
                 ],
-                tableHeight: 'auto',
-                ruleValidate: {
-                    name: [
-                        {required: false, message: '姓名不能为空', trigger: 'blur'}
-                    ],
-                    submit: [
-                        {required: false, type: 'array', min: 1, message: '至少选择一种认证方式', trigger: 'change'},
-                        {type: 'array', max: 2, message: '最多选择两种认证方式', trigger: 'change'}
-                    ]
-                }
+                tableHeight: 'auto'
             };
         },
         computed: {},
@@ -209,19 +189,12 @@
         methods: {
             getlist(index) {
                 this.dataLoading = true;
-                fetchchannel({
+                fetch({
                     limit: 10,
                     offset: 10 * index,
                     search: this.searchText
                 }).then(res => {
-                    let result = res.data.results.map(item => {
-                        let checkWays = item.check_ways_get.map(item => item.name)
-                        return {
-                            ...item,
-                            check_ways: checkWays.join(', ')
-                        };
-                    })
-                    this.dataList = result
+                    this.dataList = res.data.results
                     this.total = res.data.count
                     this.dataLoading = false;
                 }).catch();

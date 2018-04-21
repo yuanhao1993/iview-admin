@@ -49,6 +49,8 @@ export const locking = {
     component: () => import('@/views/main-components/lockscreen/components/locking-page.vue')
 };
 
+
+
 // 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里
 export const otherRouter = {
     path: '/',
@@ -56,7 +58,11 @@ export const otherRouter = {
     redirect: '/home',
     component: Main,
     children: [
-        {path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue')},
+        {
+            path: 'home',
+            title: {i18n: 'home'},
+            name: 'home_index',
+            component: () => import('@/views/home/home.vue')},
         {
             path: 'ownspace',
             title: '个人中心',
@@ -75,7 +81,18 @@ export const otherRouter = {
             name: 'shopping',
             component: () => import('@/views/advanced-router/component/shopping-info.vue')
         }, // 用于展示带参路由
-        {path: 'message', title: '消息中心', name: 'message_index', component: () => import('@/views/message/message.vue')}
+        {
+            path: 'message',
+            title: '消息中心',
+            name: 'message_index',
+            component: () => import('@/views/message/message.vue')
+        },
+        {
+            path: '/customer-list/customer-desc/:id',
+            title: '客户详情',
+            name: 'customer_desc',
+            component: () => import('@/views/customer/customer-desc.vue')
+        }
     ]
 };
 
@@ -107,22 +124,22 @@ export const appRouter = [
             }
         ]
     },
-  {
-    path: '/staff-list',
-    icon: 'lock-combination',
-    title: '员工管理',
-    name: 'staff-list',
-    access: 0,
-    component: Main,
-    children: [
-      {
-        path: 'index',
-        title: '员工管理',
-        name: 'staff_index',
-        component: () => import('@/views/staff/staff.vue')
-      }
-    ]
-  },
+    {
+        path: '/customer-list',
+        icon: 'lock-combination',
+        title: '客户管理',
+        name: 'customer-list',
+        access: 0,
+        component: Main,
+        children: [
+            {
+                path: 'index',
+                title: '客户列表',
+                name: 'customer_index',
+                component: () => import('@/views/customer/customer.vue')
+            }
+        ]
+    },
     {
         path: '/access-test',
         icon: 'lock-combination',
@@ -216,7 +233,6 @@ export const appRouter = [
                 icon: 'arrow-graph-up-right',
                 name: 'count-to',
                 title: '数字渐变',
-                // component: () => import('@/views/my-components/count-to/count-to.vue')
                 component: () => import('@/views/my-components/count-to/count-to.vue')
             },
             {

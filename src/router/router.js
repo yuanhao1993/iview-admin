@@ -91,7 +91,8 @@ export const otherRouter = {
             path: '/customer-list/customer-desc/:id',
             title: '客户详情',
             name: 'customer_desc',
-            component: () => import('@/views/customer/customer-desc.vue')
+            component: () => import('@/views/customer/customer-desc.vue'),
+            props: true
         }
     ]
 };
@@ -134,7 +135,7 @@ export const appRouter = [
         children: [
             {
                 path: 'index',
-                title: '客户列表',
+                title: '客户管理',
                 name: 'customer_index',
                 component: () => import('@/views/customer/customer.vue')
             }

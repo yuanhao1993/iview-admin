@@ -10,9 +10,9 @@ export function fetch(params) {
     });
 }
 
-export function search(params) {
+export function loadCustomerById(id) {
     return request({
-        url: '/yunhu/channelmodel/',
+        url: `/yunhu/customermodel/${id}/`,
         method: 'get',
         params: {
             limit: '',

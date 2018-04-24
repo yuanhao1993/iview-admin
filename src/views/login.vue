@@ -66,9 +66,10 @@
                             .then(response => {
                                 console.log(response)
                                 Cookies.set('TokenKey', response.data.token);
+                                Cookies.set('user', 'yousu');
                                 this.$store.commit(
                                     'setAvator',
-                                    'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg'
+                                    '../images/iview_avter.jpg'
                                 );
                                 Cookies.set('access', 0);
                                 this.$router.push({

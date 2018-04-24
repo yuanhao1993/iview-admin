@@ -54,12 +54,12 @@
                     </Form-item>
                     <Form-item label="负责渠道">
                         <i-select v-model="newform.channels" multiple placeholder="请选择负责渠道" style="width: 50%">
-                            <i-option v-for="item in channel" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in channel" :key="item.id" :value="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="部门名称">
                         <i-select v-model="newform.department" placeholder="请选择部门名称" style="width: 50%">
-                            <i-option v-for="item in departments" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in departments" :key="item.id" :value="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="身份证号" prop="identity">
@@ -98,13 +98,13 @@
                         <i-input v-model="editform.name" placeholder="请输入姓名" style="width: 50%"></i-input>
                     </Form-item>
                     <Form-item label="负责渠道">
-                        <i-select v-model="editform.channels" placeholder="请选择负责渠道" style="width: 50%">
-                            <i-option v-for="item in channel" :value="item.id">{{ item.name}}</i-option>
+                        <i-select v-model="editform.channels" multiple placeholder="请选择负责渠道" style="width: 50%">
+                            <i-option v-for="item in channel" :key="item.id" :value="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="部门名称">
                         <i-select v-model="editform.department" placeholder="请选择部门名称" style="width: 50%">
-                            <i-option v-for="item in departments" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in departments" :key="item.id" :value="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="身份证号" prop="identity">
@@ -119,9 +119,9 @@
                     <Form-item label="微信" prop="wechat">
                         <i-input v-model="editform.wechat" placeholder="请输入微信号" style="width: 50%"></i-input>
                     </Form-item>
-                    <Form-item label="密码" prop="password">
-                        <i-input v-model="editform.password" placeholder="请输入密码" style="width: 50%"></i-input>
-                    </Form-item>
+                    <!--<Form-item label="密码" prop="password">-->
+                        <!--<i-input v-model="editform.password" placeholder="请输入密码" style="width: 50%"></i-input>-->
+                    <!--</Form-item>-->
                     <!--<Form-item label="请确认密码" prop="againpassword">-->
                     <!--<i-input v-model="newform.againpassword" placeholder="请再次输入密码" style="width: 50%"></i-input>-->
                     <!--</Form-item>-->
@@ -139,7 +139,6 @@
             return {
                 dataLoading: true,
                 searchText: '',
-                departments: '',
                 total: null,
                 columns1: [
                     {
@@ -248,8 +247,8 @@
                     identity: '',
                     qq: '',
                     tel: '',
-                    wechat: '',
-                    password: ''
+                    wechat: ''
+                    // password: ''
                 },
                 staffId: ''
             };

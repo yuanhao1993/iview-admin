@@ -90,7 +90,7 @@
 </template>
 
 <script>
-    import {fetchchannel, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/channel'
+    import {fetchchannel, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/channel';
 
     export default {
         name: 'channel-table',
@@ -215,14 +215,14 @@
                     search: this.searchText
                 }).then(res => {
                     let result = res.data.results.map(item => {
-                        let checkWays = item.check_ways_get.map(item => item.name)
+                        let checkWays = item.check_ways_get.map(item => item.name);
                         return {
                             ...item,
                             check_ways: checkWays.join(', ')
                         };
-                    })
-                    this.dataList = result
-                    this.total = res.data.count
+                    });
+                    this.dataList = result;
+                    this.total = res.data.count;
                     this.dataLoading = false;
                 }).catch();
             },
@@ -231,7 +231,7 @@
             },
             editData(id) {
                 this.editUserFlag = true;
-                this.editChaId = id
+                this.editChaId = id;
                 fetchChCurrt(id).then(res => {
                     let currtCh = res.data;
                     this.editform.name = currtCh.name;
@@ -245,7 +245,7 @@
                     onOk: () => {
                         deleteChannel(editChaId).then(res => {
                             this.getlist();
-                        })
+                        });
                         this.$Notice.success({
                             title: '提示',
                             desc: '数据删除成功'
@@ -263,11 +263,11 @@
             newUser() {
                 this.newUserFlag = true;
                 //
-                this.editform.name = ''
+                this.editform.name = '';
                 this.editform.check_ways = [];
             },
             confirmUser() {
-                this.newUserFlag = false
+                this.newUserFlag = false;
                 newChannel(this.newform).then(response => {
                     this.getlist();
                 });

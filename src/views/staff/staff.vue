@@ -20,23 +20,23 @@
 <template>
     <div class="staff" ref="staff">
         <Row type="flex" class="search">
-            <Col span="8" ref="search" type="flex" justify="start">
+            <i-col span="8" ref="search" type="flex" justify="start">
                 <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
                 <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
-            </Col>
-            <Col span="4" type="flex" justify="end">
+            </i-col>
+            <i-col span="4" type="flex" justify="end">
                 <i-button @click="newUser" type="primary">新增</i-button>
-            </Col>
+            </i-col>
         </Row>
         <Table class="table" :loading="dataLoading" :columns="columns1"
                :data="staffList">
         </Table>
         <Row type="flex" justify="end">
-            <Col span="6" class="margin-bottom-20">
+            <i-col span="6" class="margin-bottom-20">
                 <div class="page" ref="page">
                     <Page :total="total" @on-change="pageChange"></Page>
                 </div>
-            </Col>
+            </i-col>
         </Row>
         <Modal
                 v-model="newUserFlag"
@@ -54,12 +54,17 @@
                     </Form-item>
                     <Form-item label="负责渠道">
                         <i-select v-model="newform.channels" multiple placeholder="请选择负责渠道" style="width: 50%">
-                            <i-option v-for="item in channel" :value="item.id">{{ item.name}}</i-option>
+                            <i-option
+                                    v-for="item in channel"
+                                    :value="item.id"
+                                    :key="item.id"
+                            >{{ item.name}}
+                            </i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="部门名称">
                         <i-select v-model="newform.department" placeholder="请选择部门名称" style="width: 50%">
-                            <i-option v-for="item in departments" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in departments" :value="item.id" :key="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="身份证号" prop="identity">
@@ -99,12 +104,12 @@
                     </Form-item>
                     <Form-item label="负责渠道">
                         <i-select v-model="editform.channels" placeholder="请选择负责渠道" style="width: 50%">
-                            <i-option v-for="item in channel" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in channel" :value="item.id" :key="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="部门名称">
                         <i-select v-model="editform.department" placeholder="请选择部门名称" style="width: 50%">
-                            <i-option v-for="item in departments" :value="item.id">{{ item.name}}</i-option>
+                            <i-option v-for="item in departments" :value="item.id" :key="item.id">{{ item.name}}</i-option>
                         </i-select>
                     </Form-item>
                     <Form-item label="身份证号" prop="identity">
@@ -139,7 +144,6 @@
             return {
                 dataLoading: true,
                 searchText: '',
-                departments: '',
                 total: null,
                 columns1: [
                     {
@@ -274,7 +278,6 @@
                     //     }
                     // })
                     this.staffList = res.data.results;
-                    console.log(this.staffList);
                     this.total = res.data.count;
                     this.dataLoading = false;
                 }).catch();
@@ -317,7 +320,6 @@
                 fetchCurrtStaff(id).then(res => {
                     let currtStaff = res.data;
                     this.editform = currtStaff;
-                    console.log('t', this.editform);
                 });
             },
             delData(staffId) {

@@ -93,6 +93,13 @@ export const otherRouter = {
             name: 'customer_desc',
             component: () => import('@/views/customer/customer-desc.vue'),
             props: true
+        },
+        {
+            path: '/customeraudit-list/customeraudit-desc/:id',
+            title: '审核详情',
+            name: 'customeraudit_desc',
+            component: () => import('@/views/customeraudit/customeraudit-desc.vue'),
+            props: true
         }
     ]
 };
@@ -144,6 +151,22 @@ export const appRouter = [
                 title: '客户管理',
                 name: 'customer_index',
                 component: () => import('@/views/customer/customer.vue')
+            }
+        ]
+    },
+    {
+        path: '/customeraudit-list',
+        icon: 'lock-combination',
+        title: '审核管理',
+        name: 'customeraudit-list',
+        access: 0,
+        component: Main,
+        children: [
+            {
+                path: 'index',
+                title: '审核管理',
+                name: 'customeraudit_index',
+                component: () => import('@/views/customeraudit/customeraudit.vue')
             }
         ]
     }

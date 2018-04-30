@@ -304,7 +304,7 @@
                         <p style="font-size: 14px;color: #1c2438;font-weight: 700;margin-bottom: 10px;">指定人员</p>
 
                         <Select v-model="next_user">
-                            <Option v-for="item in userList" :value="item.name" :key="item.id">{{item.name}}</Option>
+                            <Option v-for="item in userList" :value="item.id" :key="item.id">{{item.name}}</Option>
                         </Select>
                     </i-col>
                 </Row>

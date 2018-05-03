@@ -31,6 +31,10 @@
             padding: 10px 40px;
             .button {
                 width: 100px;
+                margin-left: 15px;
+                &:first-child {
+                    margin-left: 0;
+                }
             }
         }
 
@@ -43,17 +47,17 @@
         .audit-modal__conten {
 
             .audit-modal__content__note {
+                textarea {
+                    border: none;
+                    outline: none;
+                    resize: none;
+                    &:focus {
+                        outline: none !important;
+                        box-shadow: none;
+                    }
+                }
                 .ivu-card-body {
                     padding: 0;
-                    textarea {
-                        border: none;
-                        outline: none;
-                        resize: none;
-                        &:focus {
-                            outline: none !important;
-                            box-shadow: none;
-                        }
-                    }
                 }
             }
         }
@@ -279,9 +283,14 @@
                 </Row>
             </Tab-pane>
             <Tab-pane label="咨询云报告" icon="social-tux">
-                <div style="margin-top: 15%;text-align: center;font-size: 20px;">
-                    暂 未 开 通
-                </div>
+                <iframe
+                        src="https://credit.baiqishi.com/clweb/api/common/getreportpage?name=%E9%9F%A9%E5%A9%B7%E5%A9%B7&mobile=15215427752&timeStamp=1525355276.57&certNo=370285199209213525&token=625519EA774C18B3A7B7EA4B51603CF22D024F71&partnerId=yousu&verifyKey=0f1e33c41d5642d98f0fa59c595bd60a"
+                        id="Iframe" frameborder="0" scrolling="no" style="border:0px;"
+                        width="100%"
+                ></iframe>
+                <!--<div style="margin-top: 15%;text-align: center;font-size: 20px;">-->
+                    <!--暂 未 开 通-->
+                <!--</div>-->
             </Tab-pane>
             <Tab-pane label="反欺诈云报告" icon="social-tux">
                 <div style="margin-top: 15%;text-align: center;font-size: 20px;">
@@ -290,7 +299,8 @@
             </Tab-pane>
         </Tabs>
         <div class="fix-button-group">
-            <Button class="button" type="primary" @click="showAuditModal = true">审核</Button>
+            <i-button class="button" type="primary" @click="showBackListModal = true">加入黑名单</i-button>
+            <i-button class="button" type="primary" @click="showAuditModal = true">审核</i-button>
         </div>
 
         <!--审核模态框-->
@@ -352,6 +362,35 @@
                 </Button>
             </div>
         </Modal>
+        <Modal
+                v-model="showBackListModal"
+                title="加入黑名单"
+                width="60%"
+                @on-ok=""
+                ok-text="提交"
+                :loading="submitBackListLoadding"
+                cancel-text="关闭"
+                class="audit-modal"
+        >
+            <div class="audit-modal__conten">
+                <Row :gutter="15">
+                    <i-col :span="24" class="audit-modal__content__note">
+                        <i-input
+                                v-model.sync="backListNote"
+                                type="textarea"
+                                :rows="6"
+                                :autosize="{minRows: 6,maxRows:6}"
+                                placeholder="请写明加入黑名单的原因"
+                        ></i-input>
+                    </i-col>
+                </Row>
+            </div>
+
+            <div slot="footer">
+                <Button type="primary" size="large" :loading="submitBackListLoadding" @click="submitBackList">加入黑名单
+                </Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -363,6 +402,7 @@
         data() {
             return {
                 showAuditModal: false,
+                showBackListModal: false,
                 submitAuditMsgLoadding: false,
                 customer: null,
                 customeraudit: null,
@@ -373,7 +413,8 @@
                 // 用户列表
                 userList: [],
                 // 指定用户
-                next_user: null
+                next_user: null,
+                backListNote: ''
             };
         },
         props: ['id'],
@@ -408,6 +449,13 @@
                             desc: '您已经成功完成对该用户的信息审核'
                         });
                     });
+            },
+            submitBackList() {
+                if (this.backListNote === '') {
+                    this.$Message.warning('您没有写明将此人加入黑名单的原因');
+                    this.submitBackListLoadding = false;
+                    return null;
+                }
             }
         },
         mounted() {

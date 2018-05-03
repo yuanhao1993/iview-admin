@@ -241,7 +241,7 @@
                     </i-col>
                 </Row>
             </Tab-pane>
-            <Tab-pane label="审核笔记" icon="social-windows">
+            <Tab-pane label="追款笔记" icon="social-windows">
                 <Row :gutter="15">
                     <i-col :span="8">
                         <Card>
@@ -296,7 +296,7 @@
         <!--审核模态框-->
         <Modal
                 v-model="showAuditModal"
-                title="客户审核"
+                title="客户追款审核"
                 width="60%"
                 @on-ok=""
                 ok-text="提交"
@@ -326,14 +326,14 @@
                         <Card>
                             <p slot="title">
                                 <Icon type="ios-film-outline"></Icon>
-                                审核笔记
+                                追款笔记
                             </p>
                             <i-input
                                     v-model.sync="note"
                                     type="textarea"
                                     :rows="6"
                                     :autosize="{minRows: 6,maxRows:6}"
-                                    placeholder="记录一下笔记审核笔记吧"
+                                    placeholder="记录一下笔记追款笔记吧"
                             ></i-input>
                         </Card>
                     </i-col>
@@ -357,7 +357,7 @@
 
 <script>
     import {loadCustomerById} from '@/api/customer';
-    import {loadById, fetchUserList, update} from '@/api/customeraudit';
+    import {loadById, fetchUserList, update} from '@/api/customerurge';
 
     export default {
         data() {

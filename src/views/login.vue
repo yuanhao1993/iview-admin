@@ -65,17 +65,19 @@
                         login(this.form)
                             .then(response => {
                                 Cookies.set('TokenKey', response.data.token);
-                                Cookies.set('user', 'yousu');
+                                Cookies.set('user', response.data.user.username);
+                                Cookies.set('access', response.data.access);
+                                Cookies.set('lastLogin', response.data.user.last_login);
                                 this.$store.commit(
                                     'setAvator',
-                                    '../images/iview_avter.jpg'
+                                    'https://i.loli.net/2017/08/21/599a521472424.jpg'
                                 );
-                                Cookies.set('access', 0);
                                 this.$router.push({
                                     name: 'home_index'
                                 });
                             })
-                            .catch(() => {});
+                            .catch(() => {
+                            });
                     }
                 });
             }

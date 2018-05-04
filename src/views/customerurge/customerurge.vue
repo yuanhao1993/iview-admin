@@ -23,7 +23,7 @@
                 <Input v-model="searchText" placeholder="请输入搜索内容..." @on-change="getlist(0)"/>
             </div>
             <div class="search__btn">
-                <i-button @click="newUser" type="primary">加入黑名单</i-button>
+                <!--<i-button @click="newUser" type="primary">加入黑名单</i-button>-->
             </div>
         </div>
 

@@ -18,14 +18,15 @@
 </style>
 <template>
     <div class="customermodel" ref="channel">
-        <div class="from" ref="search">
-            <div class="search__input">
-                <Input v-model="searchText" placeholder="请输入搜索内容..." @on-change="getlist(0)"/>
-            </div>
-            <div class="search__btn">
-                <i-button @click="newUser" type="primary">加入黑名单</i-button>
-            </div>
-        </div>
+        <Row type="flex" class="search">
+            <Col span="8" ref="search" type="flex" justify="start">
+                <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
+                <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
+            </Col>
+            <Col span="4" type="flex" justify="end">
+                <i-button @click="newUser" type="primary">新增</i-button>
+            </Col>
+        </Row>
 
         <Table class="table"
                :height.sync="tableHeight"

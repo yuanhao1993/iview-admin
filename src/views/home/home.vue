@@ -221,9 +221,9 @@ import countUp from './components/countUp.vue';
 import inforCard from './components/inforCard.vue';
 import mapDataTable from './components/mapDataTable.vue';
 import toDoListItem from './components/toDoListItem.vue';
-import OutVolume from "./components/outVolume";
-import CustomerState from "./components/customerState";
-import OutCustomer from "./components/outCustomer";
+import OutVolume from './components/outVolume';
+import CustomerState from './components/customerState';
+import OutCustomer from './components/outCustomer';
 
 export default {
     name: 'home',

@@ -1,28 +1,32 @@
+<script src="../../libs/util.js"></script>
 <style scoped lang="less">
     .customermodel {
         height: 100%;
         overflow: auto;
-        .from {
-            padding: 0 0 20px;
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            .search__input {
-                width: 370px;
-            }
+        .search {
+            padding: 15px;
         }
         .page {
             padding: 20px 0;
+            text-align: right;
+            margin-right: 25px;
+        }
+        .margin-bottom-20 {
+            margin-bottom: 20px;
+        }
+        .ivu-table-wrapper{
+            margin:0 10px;
         }
     }
 </style>
 <template>
     <div class="customermodel" ref="channel">
-        <div class="from" ref="search">
-            <div class="search__input">
-                <Input v-model="searchText" placeholder="请输入搜索内容..." @on-change="getlist(0)"/>
-            </div>
-        </div>
+        <Row type="flex" class="search">
+            <Col span="8" ref="search" type="flex" justify="start">
+            <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
+            <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
+            </Col>
+        </Row>
 
         <Table class="table"
                :height.sync="tableHeight"

@@ -122,7 +122,7 @@ export const otherRouter = {
 export const appRouter = [
     {
         path: '/channel-list',
-        icon: 'lock-combination',
+        icon: 'social-dropbox',
         title: '渠道管理',
         name: 'channel-list',
         access: 0,
@@ -138,7 +138,7 @@ export const appRouter = [
     },
     {
         path: '/staff-list',
-        icon: 'lock-combination',
+        icon: 'android-person',
         title: '员工管理',
         name: 'staff-list',
         access: 0,
@@ -154,7 +154,7 @@ export const appRouter = [
     },
     {
         path: '/customer-list',
-        icon: 'lock-combination',
+        icon: 'android-people',
         title: '客户管理',
         name: 'customer-list',
         access: 0,
@@ -170,7 +170,7 @@ export const appRouter = [
     },
     {
         path: '/customeraudit-list',
-        icon: 'lock-combination',
+        icon: 'ios-filing',
         title: '审核管理',
         name: 'customeraudit-list',
         access: 0,
@@ -186,7 +186,7 @@ export const appRouter = [
     },
     {
         path: '/customerloan-list',
-        icon: 'lock-combination',
+        icon: 'social-usd',
         title: '放款管理',
         name: 'customerloan-list',
         access: 0,
@@ -202,7 +202,7 @@ export const appRouter = [
     },
     {
         path: '/customerurge-list',
-        icon: 'lock-combination',
+        icon: 'social-usd-outline',
         title: '追款管理',
         name: 'customerurge-list',
         access: 0,

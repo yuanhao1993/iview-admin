@@ -1,39 +1,44 @@
 <style scoped lang="less">
     .channel {
-        height: 100%;
-        overflow: auto;
-        .search {
-            padding: 15px;
-        }
-        .page {
-            padding: 20px 0;
-        }
-        .margin-bottom-20 {
-            margin-bottom: 20px;
-        }
+      height: 100%;
+      overflow: auto;
+      .search {
+        padding: 15px;
+      }
+      .page {
+        padding: 20px 0;
+        text-align: right;
+        margin-right: 25px;
+      }
+      .margin-bottom-20 {
+        margin-bottom: 20px;
+      }
+      .ivu-table-wrapper{
+        margin:0 10px;
+      }
     }
 </style>
 <template>
     <div class="channel" ref="channel">
-        <Row type="flex" class="search">
-            <Col span="8" ref="search" type="flex" justify="start">
-                <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
-                <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
-            </Col>
-            <Col span="4" type="flex" justify="end">
-                <i-button @click="newUser" type="primary">新增</i-button>
-            </Col>
-        </Row>
+      <Row type="flex" class="search">
+        <Col span="8" ref="search" type="flex" justify="start">
+          <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
+          <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
+        </Col>
+        <Col span="2" type="flex" justify="end">
+          <i-button @click="newUser" type="primary">新增</i-button>
+        </Col>
+      </Row>
 
         <Table class="table" :height.sync="tableHeight" :loading="dataLoading" :columns="columns"
                :data="dataList">
         </Table>
         <Row type="flex" justify="end">
-            <Col span="12" class="margin-bottom-20">
+          <Col span="12" class="margin-bottom-20">
             <div class="page" ref="page">
-                <Page :total="total" @on-change="pageChange"></Page>
+              <Page :total="total" @on-change="pageChange"></Page>
             </div>
-            </Col>
+          </Col>
         </Row>
         <Modal
                 v-model="newUserFlag"

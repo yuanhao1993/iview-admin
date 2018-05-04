@@ -1,5 +1,5 @@
 <template>
-    <div style="width:100%;height:100%;" id="user_flow"></div>
+    <div style="width:100%;height:100%;" id="out_customer"></div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ const option = {
     },
     series: [
         {
-            name: '注册量',
+            name: '逾期量',
             type: 'gauge',
             min: 0,
             max: 1000,
@@ -20,7 +20,7 @@ const option = {
                 fontSize: 18,
                 offsetCenter: [0, '50px']
             },
-            data: [{value: 50, name: '当前总注册客户量'}],
+            data: [{value: 50, name: '当前逾期客户总量'}],
             center: ['25%', '50%'],
             radius: '80%',
             title: {
@@ -37,7 +37,7 @@ const option = {
             }
         },
         {
-            name: '放款量',
+            name: '催收量',
             type: 'gauge',
             min: 0,
             max: 1000,
@@ -46,7 +46,7 @@ const option = {
                 fontSize: 18,
                 offsetCenter: [0, '50px']
             },
-            data: [{value: 50, name: '当前总放款客户量'}],
+            data: [{value: 50, name: '当前催收客户总量'}],
             center: ['75%', '50%'],
             radius: '80%',
             title: {
@@ -66,15 +66,15 @@ const option = {
 };
 
 export default {
-    name: 'userFlow',
+    name: 'outCustomer',
     mounted () {
-        let userFlow = echarts.init(document.getElementById('user_flow'));
+        let outCustomer = echarts.init(document.getElementById('out_customer'));
         option.series[0].data[0].value = (Math.random() * 1000).toFixed(2) - 0;
         option.series[1].data[0].value = (Math.random() * 1000).toFixed(2) - 0;
-        userFlow.setOption(option);
+        outCustomer.setOption(option);
 
         window.addEventListener('resize', function () {
-            userFlow.resize();
+            outCustomer.resize();
         });
     }
 };

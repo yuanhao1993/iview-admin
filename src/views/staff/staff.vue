@@ -11,9 +11,6 @@
         .margin-bottom-20 {
             margin-bottom: 20px;
         }
-        .width50 {
-            width: 60% !important;
-        }
     }
 
 </style>

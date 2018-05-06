@@ -253,7 +253,7 @@
 
 <script>
     import {loadCustomerById} from '@/api/customer';
-    import reportpage from './../../../component/reportpage/index.vue';
+    import reportpage from '@/views/customer/components/reportpage/index.vue';
     export default {
         name: 'customerDetail',
         data() {

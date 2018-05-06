@@ -240,9 +240,7 @@
                 </Row>
             </Tab-pane>
             <Tab-pane label="咨询云报告" icon="social-tux">
-                <div style="margin-top: 15%;text-align: center;font-size: 20px;">
-                    暂 未 开 通
-                </div>
+                <reportpage></reportpage>
             </Tab-pane>
             <Tab-pane label="反欺诈云报告" icon="social-tux">
                 <div style="margin-top: 15%;text-align: center;font-size: 20px;">
@@ -255,7 +253,7 @@
 
 <script>
     import {loadCustomerById} from '@/api/customer';
-
+    import reportpage from './../../../component/reportpage/index.vue';
     export default {
         name: 'customerDetail',
         data() {
@@ -264,7 +262,9 @@
             };
         },
         props: ['id'],
-        components: {},
+        components: {
+            reportpage
+        },
         computed: {},
         methods: {},
         mounted() {

@@ -13,10 +13,10 @@ export function searchChannel(params) {
     return request({
         url: '/yunhu/channelmodel/',
         method: 'get',
-        params:{
-            limit:'',
-            offset:'',
-            search:''
+        params: {
+            limit: '',
+            offset: '',
+            search: ''
         }
     });
 }
@@ -43,7 +43,7 @@ export function newChannel(data) {
     });
 }
 
-export function editChannel(id,data) {
+export function editChannel(id, data) {
     return request({
         url: `/yunhu/channelmodel/${id}/`,
         method: 'patch',

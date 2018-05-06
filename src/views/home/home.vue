@@ -35,35 +35,35 @@
                             </Row>
                         </Card>
                     </Col>
-                    <Col :md="12" :lg="24" :style="{marginBottom: '10px'}">
-                        <Card>
-                            <p slot="title" class="card-title">
-                                <Icon type="android-checkbox-outline"></Icon>
-                                待办事项
-                            </p>
-                            <a type="text" slot="extra" @click.prevent="addNewToDoItem">
-                                <Icon type="plus-round"></Icon>
-                            </a>
-                            <Modal
-                                v-model="showAddNewTodo"
-                                title="添加新的待办事项"
-                                @on-ok="addNew"
-                                @on-cancel="cancelAdd">
-                                <Row type="flex" justify="center">
-                                    <Input v-model="newToDoItemValue" icon="compose" placeholder="请输入..." style="width: 300px" />
-                                </Row>
-                                <Row slot="footer">
-                                    <Button type="text" @click="cancelAdd">取消</Button>
-                                    <Button type="primary" @click="addNew">确定</Button>
-                                </Row>
-                            </Modal>
-                            <div class="to-do-list-con">
-                                <div v-for="(item, index) in toDoList" :key="'todo-item' + (toDoList.length - index)" class="to-do-item">
-                                    <to-do-list-item :content="item.title"></to-do-list-item>
-                                </div>
-                            </div>
-                        </Card>
-                    </Col>
+                    <!--<Col :md="12" :lg="24" :style="{marginBottom: '10px'}">-->
+                        <!--<Card>-->
+                            <!--<p slot="title" class="card-title">-->
+                                <!--<Icon type="android-checkbox-outline"></Icon>-->
+                                <!--待办事项-->
+                            <!--</p>-->
+                            <!--<a type="text" slot="extra" @click.prevent="addNewToDoItem">-->
+                                <!--<Icon type="plus-round"></Icon>-->
+                            <!--</a>-->
+                            <!--<Modal-->
+                                <!--v-model="showAddNewTodo"-->
+                                <!--title="添加新的待办事项"-->
+                                <!--@on-ok="addNew"-->
+                                <!--@on-cancel="cancelAdd">-->
+                                <!--<Row type="flex" justify="center">-->
+                                    <!--<Input v-model="newToDoItemValue" icon="compose" placeholder="请输入..." style="width: 300px" />-->
+                                <!--</Row>-->
+                                <!--<Row slot="footer">-->
+                                    <!--<Button type="text" @click="cancelAdd">取消</Button>-->
+                                    <!--<Button type="primary" @click="addNew">确定</Button>-->
+                                <!--</Row>-->
+                            <!--</Modal>-->
+                            <!--<div class="to-do-list-con">-->
+                                <!--<div v-for="(item, index) in toDoList" :key="'todo-item' + (toDoList.length - index)" class="to-do-item">-->
+                                    <!--<to-do-list-item :content="item.title"></to-do-list-item>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</Card>-->
+                    <!--</Col>-->
                 </Row>
             </Col>
             <Col :md="24" :lg="16">
@@ -74,7 +74,7 @@
                             :end-val="count.createUser"
                             iconType="android-person-add"
                             color="#2d8cf0"
-                            intro-text="今日新增用户"
+                            intro-text="今日注册用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -84,7 +84,7 @@
                             iconType="ios-eye"
                             color="#64d572"
                             :iconSize="50"
-                            intro-text="今日浏览量"
+                            intro-text="今日认证用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -93,7 +93,7 @@
                             :end-val="count.collection"
                             iconType="upload"
                             color="#ffd572"
-                            intro-text="今日数据采集量"
+                            intro-text="今日放款用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
@@ -102,28 +102,28 @@
                             :end-val="count.transfer"
                             iconType="shuffle"
                             color="#f25e43"
-                            intro-text="今日服务调用量"
+                            intro-text="今日逾期用户"
                         ></infor-card>
                     </Col>
                 </Row>
-                <Row>
-                    <Card :padding="0">
-                        <p slot="title" class="card-title">
-                            <Icon type="map"></Icon>
-                            今日服务调用地理分布
-                        </p>
-                        <div class="map-con">
-                            <Col span="10">
-                                <map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>
-                            </Col>
-                            <Col span="14" class="map-incon">
-                                <Row type="flex" justify="center" align="middle">
-                                    <home-map :city-data="cityData"></home-map>
-                                </Row>
-                            </Col>
-                        </div>
-                    </Card>
-                </Row>
+                <!--<Row>-->
+                    <!--<Card :padding="0">-->
+                        <!--<p slot="title" class="card-title">-->
+                            <!--<Icon type="map"></Icon>-->
+                            <!--今日服务调用地理分布-->
+                        <!--</p>-->
+                        <!--<div class="map-con">-->
+                            <!--<Col span="10">-->
+                                <!--<map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>-->
+                            <!--</Col>-->
+                            <!--<Col span="14" class="map-incon">-->
+                                <!--<Row type="flex" justify="center" align="middle">-->
+                                    <!--<home-map :city-data="cityData"></home-map>-->
+                                <!--</Row>-->
+                            <!--</Col>-->
+                        <!--</div>-->
+                    <!--</Card>-->
+                <!--</Row>-->
             </Col>
         </Row>
         <Row :gutter="10" class="margin-top-10">
@@ -131,7 +131,7 @@
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="android-map"></Icon>
-                        上周每日来访量统计
+                        上周每日消费量统计
                     </p>
                     <div class="data-source-row">
                         <visite-volume></visite-volume>
@@ -142,7 +142,7 @@
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="ios-pulse-strong"></Icon>
-                        数据来源统计
+                        客户来源统计
                     </p>
                     <div class="data-source-row">
                         <data-source-pie></data-source-pie>
@@ -153,10 +153,45 @@
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="android-wifi"></Icon>
-                        各类用户服务调用变化统计
+                        客户总量统计
                     </p>
                     <div class="data-source-row">
                         <user-flow></user-flow>
+                    </div>
+                </Card>
+            </Col>
+        </Row>
+        <Row :gutter="10" class="margin-top-10">
+            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+                <Card>
+                    <p slot="title" class="card-title">
+                        <Icon type="android-map"></Icon>
+                        上周每日放款量统计
+                    </p>
+                    <div class="data-source-row">
+                        <out-volume></out-volume>
+                    </div>
+                </Card>
+            </Col>
+            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+                <Card>
+                    <p slot="title" class="card-title">
+                        <Icon type="ios-pulse-strong"></Icon>
+                        客户状态统计
+                    </p>
+                    <div class="data-source-row">
+                        <customer-state></customer-state>
+                    </div>
+                </Card>
+            </Col>
+            <Col :md="24" :lg="8">
+                <Card>
+                    <p slot="title" class="card-title">
+                        <Icon type="android-wifi"></Icon>
+                        逾期客户统计
+                    </p>
+                    <div class="data-source-row">
+                        <out-customer></out-customer>
                     </div>
                 </Card>
             </Col>
@@ -165,7 +200,7 @@
             <Card>
                 <p slot="title" class="card-title">
                     <Icon type="ios-shuffle-strong"></Icon>
-                    上周每日服务调用量(万)
+                    上周每日客户详情
                 </p>
                 <div class="line-chart-con">
                     <service-requests></service-requests>
@@ -186,10 +221,16 @@ import countUp from './components/countUp.vue';
 import inforCard from './components/inforCard.vue';
 import mapDataTable from './components/mapDataTable.vue';
 import toDoListItem from './components/toDoListItem.vue';
+import OutVolume from "./components/outVolume";
+import CustomerState from "./components/customerState";
+import OutCustomer from "./components/outCustomer";
 
 export default {
     name: 'home',
     components: {
+        OutCustomer,
+        CustomerState,
+        OutVolume,
         homeMap,
         dataSourcePie,
         visiteVolume,

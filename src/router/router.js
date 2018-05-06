@@ -93,6 +93,27 @@ export const otherRouter = {
             name: 'customer_desc',
             component: () => import('@/views/customer/customer-desc.vue'),
             props: true
+        },
+        {
+            path: '/customeraudit-list/customeraudit-desc/:id',
+            title: '审核详情',
+            name: 'customeraudit_desc',
+            component: () => import('@/views/customeraudit/customeraudit-desc.vue'),
+            props: true
+        },
+        {
+            path: '/customerloan-list/customerloan-desc/:id',
+            title: '放款详情',
+            name: 'customerloan_desc',
+            component: () => import('@/views/customerloan/customerloan-desc.vue'),
+            props: true
+        },
+        {
+            path: '/customerurge-list/customerurge-desc/:id',
+            title: '追款详情',
+            name: 'customerurge_desc',
+            component: () => import('@/views/customerurge/customerurge-desc.vue'),
+            props: true
         }
     ]
 };
@@ -101,7 +122,7 @@ export const otherRouter = {
 export const appRouter = [
     {
         path: '/channel-list',
-        icon: 'lock-combination',
+        icon: 'social-dropbox',
         title: '渠道管理',
         name: 'channel-list',
         access: 0,
@@ -117,7 +138,7 @@ export const appRouter = [
     },
     {
         path: '/staff-list',
-        icon: 'lock-combination',
+        icon: 'android-person',
         title: '员工管理',
         name: 'staff-list',
         access: 0,
@@ -133,7 +154,7 @@ export const appRouter = [
     },
     {
         path: '/customer-list',
-        icon: 'lock-combination',
+        icon: 'android-people',
         title: '客户管理',
         name: 'customer-list',
         access: 0,
@@ -144,6 +165,54 @@ export const appRouter = [
                 title: '客户管理',
                 name: 'customer_index',
                 component: () => import('@/views/customer/customer.vue')
+            }
+        ]
+    },
+    {
+        path: '/customeraudit-list',
+        icon: 'ios-filing',
+        title: '审核管理',
+        name: 'customeraudit-list',
+        access: 0,
+        component: Main,
+        children: [
+            {
+                path: 'index',
+                title: '审核管理',
+                name: 'customeraudit_index',
+                component: () => import('@/views/customeraudit/customeraudit.vue')
+            }
+        ]
+    },
+    {
+        path: '/customerloan-list',
+        icon: 'social-usd',
+        title: '放款管理',
+        name: 'customerloan-list',
+        access: 0,
+        component: Main,
+        children: [
+            {
+                path: 'index',
+                title: '放款管理',
+                name: 'customerloan_index',
+                component: () => import('@/views/customerloan/customerloan.vue')
+            }
+        ]
+    },
+    {
+        path: '/customerurge-list',
+        icon: 'social-usd-outline',
+        title: '追款管理',
+        name: 'customerurge-list',
+        access: 0,
+        component: Main,
+        children: [
+            {
+                path: 'index',
+                title: '追款管理',
+                name: 'customerurge_index',
+                component: () => import('@/views/customerurge/customerurge.vue')
             }
         ]
     }

@@ -1,4 +1,3 @@
-<script src="../../libs/util.js"></script>
 <style scoped lang="less">
     .customermodel {
         height: 100%;
@@ -46,7 +45,7 @@
 </template>
 
 <script>
-    import {fetch, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/customer';
+    import {fetch} from '@/api/customer';
 
     export default {
         name: 'channel-table',
@@ -55,19 +54,7 @@
                 dataLoading: true,
                 searchText: '',
                 dataList: [],
-                newUserFlag: false,
-                editUserFlag: false,
                 total: null,
-                checkways: [],
-                editChaId: '',
-                newform: {
-                    name: '',
-                    check_ways: []
-                },
-                editform: {
-                    name: '',
-                    check_ways: []
-                },
                 columns: [
                     {
                         title: 'ID',
@@ -190,7 +177,7 @@
                                     on: {
                                         click: () => {
                                             this.$router.push({
-                                                name: 'customer_desc',
+                                                name: 'customeraudit_desc',
                                                 params: {
                                                     id: params.row.id
                                                 }
@@ -208,7 +195,6 @@
         computed: {},
         created() {
             this.getlist(0);
-            this.getcheckWays();
         },
         methods: {
             getlist(index) {
@@ -225,66 +211,6 @@
             },
             pageChange(index) {
                 this.getlist(index - 1);
-            },
-            editData(id) {
-                this.editUserFlag = true;
-                this.editChaId = id;
-                fetchChCurrt(id).then(res => {
-                    let currtCh = res.data;
-                    this.editform.name = currtCh.name;
-                    this.editform.check_ways = currtCh.check_ways;
-                });
-            },
-            delData(editChaId) {
-                this.$Modal.confirm({
-                    title: '提示',
-                    content: '<p>您确定要删除该条数据？</p>',
-                    onOk: () => {
-                        deleteChannel(editChaId).then(res => {
-                            this.getlist();
-                        });
-                        this.$Notice.success({
-                            title: '提示',
-                            desc: '数据删除成功'
-                        });
-                    },
-                    onCancel: () => {
-                    }
-                });
-            },
-            getcheckWays() {
-                fetchcheckWays().then(response => {
-                    this.checkways = response.data.results;
-                });
-            },
-            newUser() {
-                this.newUserFlag = true;
-                //
-                this.editform.name = '';
-                this.editform.check_ways = [];
-            },
-            confirmUser() {
-                this.newUserFlag = false;
-                newChannel(this.newform).then(response => {
-                    this.getlist();
-                });
-            },
-            cancelUser() {
-                this.newUserFlag = false;
-            },
-            confirmEdit(editChaId) {
-                this.editUserFlag = false;
-                editChannel(editChaId, this.editform).then(response => {
-                    this.getlist();
-                    this.$Notice.success({
-                        title: '提示',
-                        desc: '数据修改成功'
-                    });
-                    // this.$Message.info('数据修改成功');
-                });
-            },
-            cancelEdit() {
-                this.editUserFlag = false;
             }
         },
         mounted() {

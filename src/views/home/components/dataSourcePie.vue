@@ -23,7 +23,7 @@ export default {
                 legend: {
                     orient: 'vertical',
                     left: 'right',
-                    data: ['ios', 'android', 'pc', 'web', 'others']
+                    // data: ['今日头条', '贷款超市a', '贷款超市b', '贷款超市c', '贷款超市d']
                 },
                 series: [
                     {
@@ -32,11 +32,11 @@ export default {
                         radius: '66%',
                         center: ['50%', '60%'],
                         data: [
-                            {value: 2103456, name: 'ios', itemStyle: {normal: {color: '#9bd598'}}},
-                            {value: 1305923, name: 'android', itemStyle: {normal: {color: '#ffd58f'}}},
-                            {value: 543250, name: 'pc', itemStyle: {normal: {color: '#abd5f2'}}},
-                            {value: 798403, name: 'web', itemStyle: {normal: {color: '#ab8df2'}}},
-                            {value: 302340, name: 'others', itemStyle: {normal: {color: '#e14f60'}}}
+                            {value: 2013336, name: '今日头条', itemStyle: {normal: {color: '#9bd598'}}},
+                            {value: 1305923, name: '贷款超市a', itemStyle: {normal: {color: '#ffd58f'}}},
+                            {value: 543250, name: '贷款超市b', itemStyle: {normal: {color: '#abd5f2'}}},
+                            {value: 798403, name: '贷款超市c', itemStyle: {normal: {color: '#ab8df2'}}},
+                            {value: 302340, name: '贷款超市d', itemStyle: {normal: {color: '#e14f60'}}}
                         ],
                         itemStyle: {
                             emphasis: {

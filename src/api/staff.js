@@ -16,7 +16,7 @@ export function newStaff(data) {
         data
     });
 }
-export function editStaff(id,data) {
+export function editStaff(id, data) {
     return request({
         url: `/yunhu/usermodel/${id}/`,
         method: 'patch',

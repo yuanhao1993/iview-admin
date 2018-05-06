@@ -1,42 +1,44 @@
 <style scoped lang="less">
     .channel {
-        height: 100%;
-        overflow: auto;
-        .from {
-            padding: 0 0 20px;
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            .search__input{
-                width: 370px;
-            }
-
-        }
-        .page {
-            padding: 20px 0;
-        }
+      height: 100%;
+      overflow: auto;
+      .search {
+        padding: 15px;
+      }
+      .page {
+        padding: 20px 0;
+        text-align: right;
+        margin-right: 25px;
+      }
+      .margin-bottom-20 {
+        margin-bottom: 20px;
+      }
+      .ivu-table-wrapper{
+        margin:0 10px;
+      }
     }
 </style>
 <template>
     <div class="channel" ref="channel">
-        <div class="from" ref="search">
-            <div class="search__input">
-                <Input v-model="searchText" placeholder="请输入搜索内容..." @on-change="getlist(0)"/>
-            </div>
-            <div class="search__btn">
-                <i-button @click="newUser" type="primary">新增</i-button>
-            </div>
-        </div>
+      <Row type="flex" class="search">
+        <Col span="8" ref="search" type="flex" justify="start">
+          <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
+          <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
+        </Col>
+        <Col span="2" type="flex" justify="end">
+          <i-button @click="newUser" type="primary">新增</i-button>
+        </Col>
+      </Row>
 
         <Table class="table" :height.sync="tableHeight" :loading="dataLoading" :columns="columns"
                :data="dataList">
         </Table>
         <Row type="flex" justify="end">
-            <Col span="12" class="margin-bottom-20">
+          <Col span="12" class="margin-bottom-20">
             <div class="page" ref="page">
-                <Page :total="total" @on-change="pageChange"></Page>
+              <Page :total="total" @on-change="pageChange"></Page>
             </div>
-            </Col>
+          </Col>
         </Row>
         <Modal
                 v-model="newUserFlag"
@@ -90,7 +92,7 @@
 </template>
 
 <script>
-    import {fetchchannel, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/channel'
+    import {fetchchannel, fetchcheckWays, newChannel, editChannel, fetchChCurrt, deleteChannel} from '@/api/channel';
 
     export default {
         name: 'channel-table',
@@ -215,14 +217,14 @@
                     search: this.searchText
                 }).then(res => {
                     let result = res.data.results.map(item => {
-                        let checkWays = item.check_ways_get.map(item => item.name)
+                        let checkWays = item.check_ways_get.map(item => item.name);
                         return {
                             ...item,
                             check_ways: checkWays.join(', ')
                         };
-                    })
-                    this.dataList = result
-                    this.total = res.data.count
+                    });
+                    this.dataList = result;
+                    this.total = res.data.count;
                     this.dataLoading = false;
                 }).catch();
             },
@@ -231,7 +233,7 @@
             },
             editData(id) {
                 this.editUserFlag = true;
-                this.editChaId = id
+                this.editChaId = id;
                 fetchChCurrt(id).then(res => {
                     let currtCh = res.data;
                     this.editform.name = currtCh.name;
@@ -245,7 +247,7 @@
                     onOk: () => {
                         deleteChannel(editChaId).then(res => {
                             this.getlist();
-                        })
+                        });
                         this.$Notice.success({
                             title: '提示',
                             desc: '数据删除成功'
@@ -263,11 +265,11 @@
             newUser() {
                 this.newUserFlag = true;
                 //
-                this.editform.name = ''
+                this.editform.name = '';
                 this.editform.check_ways = [];
             },
             confirmUser() {
-                this.newUserFlag = false
+                this.newUserFlag = false;
                 newChannel(this.newform).then(response => {
                     this.getlist();
                 });

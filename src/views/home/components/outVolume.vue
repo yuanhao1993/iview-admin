@@ -1,11 +1,11 @@
 <template>
-    <div style="width:100%;height:100%;" id="visite_volume_con"></div>
+    <div style="width:100%;height:100%;" id="out_volume_con"></div>
 </template>
 
 <script>
 import echarts from 'echarts';
 export default {
-    name: 'visiteVolume',
+    name: 'outVolume',
     data () {
         return {
             //
@@ -13,7 +13,7 @@ export default {
     },
     mounted () {
         this.$nextTick(() => {
-            let visiteVolume = echarts.init(document.getElementById('visite_volume_con'));
+            let outVolume = echarts.init(document.getElementById('out_volume_con'));
             let xAxisData = [];
             let data1 = [];
             let data2 = [];
@@ -50,25 +50,25 @@ export default {
                 },
                 series: [
                     {
-                        name: '消费量',
+                        name: '放款量',
                         type: 'bar',
                         data: [
-                            {value: 453682, name: 'Mon', itemStyle: {normal: {color: '#2d8cf0'}}},
+                            {value: 4531002, name: 'Mon', itemStyle: {normal: {color: '#2d8cf0'}}},
                             {value: 879545, name: 'Tues', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 2354678, name: 'Wed', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1598403, name: 'Thur', itemStyle: {normal: {color: '#2d8cf0'}}},
+                            {value: 235460, name: 'Wed', itemStyle: {normal: {color: '#2d8cf0'}}},
+                            {value: 159008, name: 'Thur', itemStyle: {normal: {color: '#2d8cf0'}}},
                             {value: 543250, name: 'Fri', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1305923, name: 'Sat', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1103456, name: 'Sun', itemStyle: {normal: {color: '#2d8cf0'}}}
+                            {value: 130529, name: 'Sat', itemStyle: {normal: {color: '#2d8cf0'}}},
+                            {value: 110345, name: 'Sun', itemStyle: {normal: {color: '#2d8cf0'}}}
                         ]
                     }
                 ]
             };
 
-            visiteVolume.setOption(option);
+            outVolume.setOption(option);
 
             window.addEventListener('resize', function () {
-                visiteVolume.resize();
+                outVolume.resize();
             });
         });
     }

@@ -16,7 +16,7 @@ if (env === 'development') {
 } else {
     ajaxUrl = 'http://127.0.0.1:8080';
 }
-
+// ajaxUrl = 'http://127.0.0.1:8000';
 util.ajax = axios.create({
     baseURL: ajaxUrl,
     timeout: 30000

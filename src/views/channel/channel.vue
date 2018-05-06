@@ -253,8 +253,7 @@
                             desc: '数据删除成功'
                         });
                     },
-                    onCancel: () => {
-                    }
+                    onCancel: () => {}
                 });
             },
             getcheckWays() {

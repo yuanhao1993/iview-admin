@@ -255,6 +255,7 @@
 
 <script>
     import {loadCustomerById} from '@/api/customer';
+    import zxy from './zxy';
 
     export default {
         name: 'customerDetail',
@@ -264,7 +265,9 @@
             };
         },
         props: ['id'],
-        components: {},
+        components: {
+            zxy
+        },
         computed: {},
         methods: {},
         mounted() {

@@ -240,7 +240,7 @@
                 </Row>
             </Tab-pane>
             <Tab-pane label="咨询云报告" icon="social-tux">
-                <reportpage></reportpage>
+                <iframe  v-bind:src="url" width="100%" height="100%" frameborder="0" ></iframe>
             </Tab-pane>
             <Tab-pane label="反欺诈云报告" icon="social-tux">
                 <div style="margin-top: 15%;text-align: center;font-size: 20px;">
@@ -253,17 +253,16 @@
 
 <script>
     import {loadCustomerById} from '@/api/customer';
-    import reportpage from '@/views/customer/components/reportpage/index.vue';
     export default {
         name: 'customerDetail',
         data() {
             return {
-                customer: null
+                customer: null,
+                url: `http://127.0.0.1:8050/yunhu/customermodel/${this.id}/zxy_report/`
             };
         },
         props: ['id'],
         components: {
-            reportpage
         },
         computed: {},
         methods: {},

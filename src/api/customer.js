@@ -59,3 +59,11 @@ export function deleteChannel(id) {
         method: 'delete'
     });
 }
+
+export function fetchZxyReport(id) {
+    console.log("---------==========---------------")
+    return request({
+        url: `/yunhu/customermodel/${id}/zxy_report/`,
+        method: 'get'
+    });
+}

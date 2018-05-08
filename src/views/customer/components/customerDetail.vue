@@ -240,7 +240,8 @@
                 </Row>
             </Tab-pane>
             <Tab-pane label="咨询云报告" icon="social-tux">
-                <iframe  v-bind:src="url" width="100%" height="100%" frameborder="0" ></iframe>
+                <iframe v-bind:srcdoc="report" width="100%" height="100%" frameborder="0">
+                </iframe>
             </Tab-pane>
             <Tab-pane label="反欺诈云报告" icon="social-tux">
                 <div style="margin-top: 15%;text-align: center;font-size: 20px;">
@@ -252,18 +253,20 @@
 </template>
 
 <script>
-    import {loadCustomerById} from '@/api/customer';
+    import {loadCustomerById, fetchZxyReport} from '@/api/customer';
+    // import ajaxUrl from '@/libs/util';
+
     export default {
         name: 'customerDetail',
         data() {
             return {
                 customer: null,
-                url: `http://127.0.0.1:8050/yunhu/customermodel/${this.id}/zxy_report/`
+                // url: `${ajaxUrl}/yunhu/customermodel/${this.id}/zxy_report/`
+                report: null
             };
         },
         props: ['id'],
-        components: {
-        },
+        components: {},
         computed: {},
         methods: {},
         mounted() {
@@ -273,6 +276,9 @@
                 .then(res => {
                     this.customer = res.data;
                 });
+            fetchZxyReport(this.id).then(res => {
+                this.report = res.data;
+            });
         }
     };
 </script>

@@ -9,7 +9,7 @@ util.title = function (title) {
     title = title || 'iView admin';
     window.document.title = title;
 };
-let ajaxUrl = '';
+export let ajaxUrl = '';
 
 if (env === 'development') {
     ajaxUrl = 'http://47.94.133.188:8000';
@@ -277,5 +277,45 @@ util.checkUpdate = function (vm) {
         }
     });
 };
+// (1, u"待审核"),
+// (2, u"拒绝受理"),
+// (3, u"审核通过"),
+// (4, u"需要复审"),
+// (5, u"已放款"),
+// (6, u"续期"),
+// (7, u"结清"),
+// (8, u"逾期"),
+// (9, u"催收"),
+// (10, u"催收结清"),
 
+export const customerStatus = {
+    1: '待审核',
+    2: '拒绝受理',
+    3: '审核通过',
+    4: '需要复审',
+    5: '已放款',
+    6: '续期',
+    7: '结清',
+    8: '逾期',
+    9: '催收',
+    10: '催收结清'
+};
+
+export const customerAuditStatus = {
+    2: '拒绝受理',
+    3: '审核通过',
+    4: '需要复审'
+};
+export const customerLoanStatus = {
+    2: '拒绝受理',
+    4: '需要复审',
+    5: '已放款',
+    6: '续期',
+    7: '结清',
+    8: '逾期',
+    9: '催收'
+};
+export const customerUrgeStatus = {
+    10: '催收结清'
+};
 export default util;

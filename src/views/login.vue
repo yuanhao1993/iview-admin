@@ -40,7 +40,7 @@
 <script>
     import Cookies from 'js-cookie';
     import {login} from '@/api/user';
-    import department from '@/libs/util.js'
+    import department from '@/libs/util.js';
 
     export default {
         data: function () {
@@ -67,6 +67,7 @@
                             .then(response => {
                                 Cookies.set('TokenKey', response.data.token);
                                 Cookies.set('user', response.data.user.username);
+                                Cookies.set('userName', response.data.user.name);
                                 Cookies.set('access', response.data.access);
                                 Cookies.set('department', department[response.data.access]);
                                 Cookies.set('lastLogin', response.data.user.last_login);

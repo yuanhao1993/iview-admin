@@ -1,8 +1,9 @@
 <style lang="less">
     @import "./home.less";
     @import "../../styles/common.less";
-    .user-infor{
-        height:70px;
+
+    .user-infor {
+        height: 70px;
     }
 </style>
 <template>
@@ -15,118 +16,62 @@
                             <Row type="flex" class="user-infor">
                                 <Col span="8">
                                     <Row class-name="made-child-con-middle" type="flex" align="middle">
-                                        <img class="avator-img" :src="avatorPath" />
+                                        <img class="avator-img" :src="avatorPath"/>
                                     </Row>
                                 </Col>
                                 <Col span="16" style="padding-left:6px;">
                                     <Row class-name="made-child-con-middle" type="flex" align="middle">
                                         <div>
-                                            <b class="card-user-infor-name">Admin</b>
-                                            <p>super admin</p>
+                                            <b class="card-user-infor-name">{{ userName }}</b>
+                                            <p>{{ department }}</p>
                                         </div>
                                     </Row>
                                 </Col>
                             </Row>
-                            <!--<div class="line-gray"></div>-->
-                            <!--<Row class="margin-top-8">-->
-                                <!--<Col span="8"><p class="notwrap">上次登录时间:</p></Col>-->
-                                <!--<Col span="16" class="padding-left-8">2017.09.12-13:32:20</Col>-->
-                            <!--</Row>-->
-                            <!--<Row class="margin-top-8">-->
-                                <!--<Col span="8"><p class="notwrap">上次登录地点:</p></Col>-->
-                                <!--<Col span="16" class="padding-left-8">北京</Col>-->
-                            <!--</Row>-->
                         </Card>
                     </Col>
-                    <!--<Col :md="12" :lg="24" :style="{marginBottom: '10px'}">-->
-                        <!--<Card>-->
-                            <!--<p slot="title" class="card-title">-->
-                                <!--<Icon type="android-checkbox-outline"></Icon>-->
-                                <!--待办事项-->
-                            <!--</p>-->
-                            <!--<a type="text" slot="extra" @click.prevent="addNewToDoItem">-->
-                                <!--<Icon type="plus-round"></Icon>-->
-                            <!--</a>-->
-                            <!--<Modal-->
-                                <!--v-model="showAddNewTodo"-->
-                                <!--title="添加新的待办事项"-->
-                                <!--@on-ok="addNew"-->
-                                <!--@on-cancel="cancelAdd">-->
-                                <!--<Row type="flex" justify="center">-->
-                                    <!--<Input v-model="newToDoItemValue" icon="compose" placeholder="请输入..." style="width: 300px" />-->
-                                <!--</Row>-->
-                                <!--<Row slot="footer">-->
-                                    <!--<Button type="text" @click="cancelAdd">取消</Button>-->
-                                    <!--<Button type="primary" @click="addNew">确定</Button>-->
-                                <!--</Row>-->
-                            <!--</Modal>-->
-                            <!--<div class="to-do-list-con">-->
-                                <!--<div v-for="(item, index) in toDoList" :key="'todo-item' + (toDoList.length - index)" class="to-do-item">-->
-                                    <!--<to-do-list-item :content="item.title"></to-do-list-item>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</Card>-->
-                    <!--</Col>-->
                 </Row>
             </Col>
             <Col :md="24" :lg="16">
                 <Row :gutter="5">
                     <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
-                            id-name="user_created_count"
-                            :end-val = "count.register"
-                            iconType="android-person-add"
-                            color="#2d8cf0"
-                            intro-text="今日注册用户"
+                                id-name="user_created_count"
+                                :end-val="count.register"
+                                iconType="android-person-add"
+                                color="#2d8cf0"
+                                intro-text="今日注册用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
-                            id-name="visit_count"
-                            :end-val = "count.authentication"
-                            iconType="ios-eye"
-                            color="#64d572"
-                            :iconSize="50"
-                            intro-text="今日认证用户"
+                                id-name="visit_count"
+                                :end-val="count.authentication"
+                                iconType="ios-eye"
+                                color="#64d572"
+                                :iconSize="50"
+                                intro-text="今日认证用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
-                            id-name="collection_count"
-                            :end-val = "count.loan"
-                            iconType="upload"
-                            color="#ffd572"
-                            intro-text="今日放款用户"
+                                id-name="collection_count"
+                                :end-val="count.loan"
+                                iconType="upload"
+                                color="#ffd572"
+                                intro-text="今日放款用户"
                         ></infor-card>
                     </Col>
                     <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
-                            id-name="transfer_count"
-                            :end-val = "count.overdue"
-                            iconType="shuffle"
-                            color="#f25e43"
-                            intro-text="今日逾期用户"
+                                id-name="transfer_count"
+                                :end-val="count.overdue"
+                                iconType="shuffle"
+                                color="#f25e43"
+                                intro-text="今日逾期用户"
                         ></infor-card>
                     </Col>
                 </Row>
-                <!--<Row>-->
-                    <!--<Card :padding="0">-->
-                        <!--<p slot="title" class="card-title">-->
-                            <!--<Icon type="map"></Icon>-->
-                            <!--今日服务调用地理分布-->
-                        <!--</p>-->
-                        <!--<div class="map-con">-->
-                            <!--<Col span="10">-->
-                                <!--<map-data-table :cityData="cityData" height="281" :style-obj="{margin: '12px 0 0 11px'}"></map-data-table>-->
-                            <!--</Col>-->
-                            <!--<Col span="14" class="map-incon">-->
-                                <!--<Row type="flex" justify="center" align="middle">-->
-                                    <!--<home-map :city-data="cityData"></home-map>-->
-                                <!--</Row>-->
-                            <!--</Col>-->
-                        <!--</div>-->
-                    <!--</Card>-->
-                <!--</Row>-->
             </Col>
         </Row>
         <Row :gutter="10" class="margin-top-10">
@@ -134,7 +79,7 @@
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="android-map"></Icon>
-                        上周每日消费量统计
+                        用户消费量统计
                     </p>
                     <div class="data-source-row">
                         <visite-volume></visite-volume>
@@ -152,64 +97,18 @@
                     </div>
                 </Card>
             </Col>
-            <!--<Col :md="24" :lg="8">-->
-                <!--<Card>-->
-                    <!--<p slot="title" class="card-title">-->
-                        <!--<Icon type="android-wifi"></Icon>-->
-                        <!--客户总量统计-->
-                    <!--</p>-->
-                    <!--<div class="data-source-row">-->
-                        <!--<user-flow></user-flow>-->
-                    <!--</div>-->
-                <!--</Card>-->
-            <!--</Col>-->
             <Col :md="24" :lg="8" :style="{margin: '15px 0'}">
-            <Card>
-                <p slot="title" class="card-title">
-                    <Icon type="ios-pulse-strong"></Icon>
-                    客户状态统计
-                </p>
-                <div class="data-source-row">
-                    <customer-state></customer-state>
-                </div>
-            </Card>
+                <Card>
+                    <p slot="title" class="card-title">
+                        <Icon type="ios-pulse-strong"></Icon>
+                        客户状态统计
+                    </p>
+                    <div class="data-source-row">
+                        <customer-state></customer-state>
+                    </div>
+                </Card>
             </Col>
         </Row>
-        <!--<Row :gutter="10" class="margin-top-10">-->
-            <!--<Col :md="24" :lg="8" :style="{marginBottom: '10px'}">-->
-                <!--<Card>-->
-                    <!--<p slot="title" class="card-title">-->
-                        <!--<Icon type="android-map"></Icon>-->
-                        <!--上周每日放款量统计-->
-                    <!--</p>-->
-                    <!--<div class="data-source-row">-->
-                        <!--<out-volume></out-volume>-->
-                    <!--</div>-->
-                <!--</Card>-->
-            <!--</Col>-->
-            <!--<Col :md="24" :lg="8" :style="{marginBottom: '10px'}">-->
-                <!--<Card>-->
-                    <!--<p slot="title" class="card-title">-->
-                        <!--<Icon type="ios-pulse-strong"></Icon>-->
-                        <!--客户状态统计-->
-                    <!--</p>-->
-                    <!--<div class="data-source-row">-->
-                        <!--<customer-state></customer-state>-->
-                    <!--</div>-->
-                <!--</Card>-->
-            <!--</Col>-->
-            <!--<Col :md="24" :lg="8">-->
-                <!--<Card>-->
-                    <!--<p slot="title" class="card-title">-->
-                        <!--<Icon type="android-wifi"></Icon>-->
-                        <!--逾期客户统计-->
-                    <!--</p>-->
-                    <!--<div class="data-source-row">-->
-                        <!--<out-customer></out-customer>-->
-                    <!--</div>-->
-                <!--</Card>-->
-            <!--</Col>-->
-        <!--</Row>-->
         <Row class="margin-top-10">
             <Card>
                 <p slot="title" class="card-title">
@@ -228,106 +127,78 @@
 </template>
 
 <script>
-import cityData from './map-data/get-city-value.js';
-import homeMap from './components/map.vue';
-import dataSourcePie from './components/dataSourcePie.vue';
-import visiteVolume from './components/visiteVolume.vue';
-import serviceRequests from './components/serviceRequests.vue';
-import userFlow from './components/userFlow.vue';
-import countUp from './components/countUp.vue';
-import inforCard from './components/inforCard.vue';
-import mapDataTable from './components/mapDataTable.vue';
-import toDoListItem from './components/toDoListItem.vue';
-import OutVolume from './components/outVolume';
-import CustomerState from './components/customerState';
-import OutCustomer from './components/outCustomer';
+    import homeMap from './components/map.vue';
+    import dataSourcePie from './components/dataSourcePie.vue';
+    import visiteVolume from './components/visiteVolume.vue';
+    import serviceRequests from './components/serviceRequests.vue';
+    import userFlow from './components/userFlow.vue';
+    import countUp from './components/countUp.vue';
+    import inforCard from './components/inforCard.vue';
+    import mapDataTable from './components/mapDataTable.vue';
+    import toDoListItem from './components/toDoListItem.vue';
+    import OutVolume from './components/outVolume';
+    import CustomerState from './components/customerState';
+    import OutCustomer from './components/outCustomer';
 
-import {statusAnalysisToday, channelAnalysis} from '@/api/home';
-import CustomerExpenseTable from './components/customExpense.vue'
+    import {statusAnalysisToday} from '@/api/home';
+    import CustomerExpenseTable from './components/customExpense.vue';
+    import {Cookies} from 'js-cookie';
 
-export default {
-    name: 'home',
-    components: {
-      CustomerExpenseTable,
-      OutCustomer,
-        CustomerState,
-        OutVolume,
-        homeMap,
-        dataSourcePie,
-        visiteVolume,
-        serviceRequests,
-        userFlow,
-        countUp,
-        inforCard,
-        mapDataTable,
-        toDoListItem
-    },
-    data () {
-        return {
-            toDoList: [
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                },
-                {
-                    title: '去iView官网学习完整的iView组件'
-                }
-            ],
-            count: {
-                register: 1,
-                authentication: 1,
-                loan: 1,
-                overdue: 1
-            },
-            cityData: cityData,
-            showAddNewTodo: false,
-            newToDoItemValue: ''
-        };
-    },
-    created() {
-        this.getlist();
-    },
-    computed: {
-        avatorPath () {
-            return localStorage.avatorImgPath;
-        }
-    },
-    methods: {
-        addNewToDoItem () {
-            this.showAddNewTodo = true;
+    export default {
+        name: 'home',
+        components: {
+            CustomerExpenseTable,
+            OutCustomer,
+            CustomerState,
+            OutVolume,
+            homeMap,
+            dataSourcePie,
+            visiteVolume,
+            serviceRequests,
+            userFlow,
+            countUp,
+            inforCard,
+            mapDataTable,
+            toDoListItem
         },
-        addNew () {
-            if (this.newToDoItemValue.length !== 0) {
-                this.toDoList.unshift({
-                    title: this.newToDoItemValue
-                });
-                setTimeout(() => {
-                    this.newToDoItemValue = '';
-                }, 200);
-                this.showAddNewTodo = false;
-            } else {
-                this.$Message.error('请输入待办事项内容');
+        data() {
+            return {
+                count: {
+                    register: 1,
+                    authentication: 1,
+                    loan: 1,
+                    overdue: 1
+                },
+                userName: '',
+                department: ''
+            };
+        },
+        created() {
+            this.getlist();
+            this.init();
+        },
+        computed: {
+            avatorPath() {
+                return localStorage.avatorImgPath;
             }
         },
-        cancelAdd () {
-            this.showAddNewTodo = false;
-            this.newToDoItemValue = '';
+        mounted() {
+            this.init();
         },
-        getlist() {
-            statusAnalysisToday().then(res => {
-                let result = res.data;
-                //console.log('今日', res.data);
-                this.count = result;
-            });
+        methods: {
+            init() {
+                console.log("------------------------------");
+                console.log(Cookies.get('userName'));
+                this.userName = Cookies.get('userName');
+                this.department = Cookies.get('department');
+            },
+            getlist() {
+                statusAnalysisToday().then(res => {
+                    let result = res.data;
+                    // console.log('今日', res.data);
+                    this.count = result;
+                });
+            }
         }
-    }
-};
+    };
 </script>

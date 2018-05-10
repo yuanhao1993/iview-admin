@@ -4,16 +4,29 @@
 
 <script>
 import echarts from 'echarts';
+import {expensemodel} from '@/api/home';
 export default {
     name: 'visiteVolume',
     data () {
         return {
-            //
+            option: {},
+            visiteVolume: ''
         };
     },
+    methods: {
+        getlist() {
+            expensemodel().then(res => {
+                let result = res.data;
+                //console.log('客户消费量', res.data);
+                this.option.series[0].data = result;
+                this.visiteVolume.setOption(this.option);
+            });
+        }
+    },
     mounted () {
+        this.getlist();
         this.$nextTick(() => {
-            let visiteVolume = echarts.init(document.getElementById('visite_volume_con'));
+            this.visiteVolume = echarts.init(document.getElementById('visite_volume_con'));
             let xAxisData = [];
             let data1 = [];
             let data2 = [];
@@ -52,23 +65,15 @@ export default {
                     {
                         name: '消费量',
                         type: 'bar',
-                        data: [
-                            {value: 453682, name: 'Mon', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 879545, name: 'Tues', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 2354678, name: 'Wed', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1598403, name: 'Thur', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 543250, name: 'Fri', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1305923, name: 'Sat', itemStyle: {normal: {color: '#2d8cf0'}}},
-                            {value: 1103456, name: 'Sun', itemStyle: {normal: {color: '#2d8cf0'}}}
-                        ]
+                        data: []
                     }
                 ]
             };
-
-            visiteVolume.setOption(option);
+            this.option = option;
+            // visiteVolume.setOption(option);
 
             window.addEventListener('resize', function () {
-                visiteVolume.resize();
+                this.visiteVolume.resize();
             });
         });
     }

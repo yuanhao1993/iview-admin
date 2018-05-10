@@ -4,17 +4,29 @@
 
 <script>
 import echarts from 'echarts';
-
+import {customerSource} from "@/api/home";
 export default {
     name: 'dataSourcePie',
     data () {
         return {
-            //
+            option: {},
+            customerState: ''
         };
     },
+    methods: {
+        getlist() {
+            customerSource().then(res => {
+                let result = res.data;
+                //console.log('客户来源', res.data);
+                this.option.series[0].data = result;
+                this.dataSourcePie.setOption(this.option);
+            });
+        }
+    },
     mounted () {
+        this.getlist();
         this.$nextTick(() => {
-            var dataSourcePie = echarts.init(document.getElementById('data_source_con'));
+            this.dataSourcePie = echarts.init(document.getElementById('data_source_con'));
             const option = {
                 tooltip: {
                     trigger: 'item',
@@ -31,13 +43,7 @@ export default {
                         type: 'pie',
                         radius: '66%',
                         center: ['50%', '60%'],
-                        data: [
-                            {value: 2013336, name: '今日头条', itemStyle: {normal: {color: '#9bd598'}}},
-                            {value: 1305923, name: '贷款超市a', itemStyle: {normal: {color: '#ffd58f'}}},
-                            {value: 543250, name: '贷款超市b', itemStyle: {normal: {color: '#abd5f2'}}},
-                            {value: 798403, name: '贷款超市c', itemStyle: {normal: {color: '#ab8df2'}}},
-                            {value: 302340, name: '贷款超市d', itemStyle: {normal: {color: '#e14f60'}}}
-                        ],
+                        data: [],
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,
@@ -48,9 +54,9 @@ export default {
                     }
                 ]
             };
-            dataSourcePie.setOption(option);
+            this.option = option;
             window.addEventListener('resize', function () {
-                dataSourcePie.resize();
+                this.dataSourcePie.resize();
             });
         });
     }

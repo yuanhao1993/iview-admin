@@ -318,4 +318,12 @@ export const customerLoanStatus = {
 export const customerUrgeStatus = {
     10: '催收结清'
 };
+
+export const department = {
+    0: '管理员',
+    1: '审核部',
+    2: '财务部',
+    3: '催收部'
+};
+
 export default util;

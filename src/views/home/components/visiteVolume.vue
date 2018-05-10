@@ -74,9 +74,9 @@
                 this.option = option;
                 // visiteVolume.setOption(option);
 
-                window.addEventListener('resize', function () {
-                    this.visiteVolume.resize();
-                });
+//                window.addEventListener('resize', function () {
+//                    this.visiteVolume.resize();
+//                });
             });
         }
     };

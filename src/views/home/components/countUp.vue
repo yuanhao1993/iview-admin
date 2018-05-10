@@ -90,19 +90,13 @@ export default {
                 this.unit = res.unit;
                 let demo = {};
                 this.demo = demo = new CountUp(this.idName, this.startVal, endVal, this.decimals, this.duration, this.options);
+                this.demo.update(endVal);
                 if (!demo.error) {
                     demo.start();
                 }
             }, this.delay);
         });
     },
-    watch: {
-        endVal (val) {
-            let res = transformValue(val);
-            let endVal = res.val;
-            this.unit = res.unit;
-            this.demo.update(endVal);
-        }
-    }
+    watch: {}
 };
 </script>

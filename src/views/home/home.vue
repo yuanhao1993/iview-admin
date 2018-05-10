@@ -118,9 +118,6 @@
                 <div>
                     <customer-expense-table></customer-expense-table>
                 </div>
-                <div class="line-chart-con">
-                    <!--<service-requests></service-requests>-->
-                </div>
             </Card>
         </Row>
     </div>
@@ -130,32 +127,23 @@
     import homeMap from './components/map.vue';
     import dataSourcePie from './components/dataSourcePie.vue';
     import visiteVolume from './components/visiteVolume.vue';
-    import serviceRequests from './components/serviceRequests.vue';
-    import userFlow from './components/userFlow.vue';
+    import CustomerState from './components/customerState';
     import countUp from './components/countUp.vue';
     import inforCard from './components/inforCard.vue';
     import mapDataTable from './components/mapDataTable.vue';
     import toDoListItem from './components/toDoListItem.vue';
-    import OutVolume from './components/outVolume';
-    import CustomerState from './components/customerState';
-    import OutCustomer from './components/outCustomer';
-
     import {statusAnalysisToday} from '@/api/home';
     import CustomerExpenseTable from './components/customExpense.vue';
-    import {Cookies} from 'js-cookie';
+    import Cookies from 'js-cookie';
 
     export default {
         name: 'home',
         components: {
             CustomerExpenseTable,
-            OutCustomer,
             CustomerState,
-            OutVolume,
             homeMap,
             dataSourcePie,
             visiteVolume,
-            serviceRequests,
-            userFlow,
             countUp,
             inforCard,
             mapDataTable,
@@ -173,21 +161,21 @@
                 department: ''
             };
         },
-        created() {
-            this.getlist();
-            this.init();
-        },
+//        created() {
+//            this.getlist();
+//            this.init();
+//        },
         computed: {
             avatorPath() {
                 return localStorage.avatorImgPath;
             }
         },
         mounted() {
-            this.init();
+            this.getlist();
+            this.setCookie();
         },
         methods: {
-            init() {
-                console.log("------------------------------");
+            setCookie() {
                 console.log(Cookies.get('userName'));
                 this.userName = Cookies.get('userName');
                 this.department = Cookies.get('department');
@@ -195,7 +183,7 @@
             getlist() {
                 statusAnalysisToday().then(res => {
                     let result = res.data;
-                    // console.log('今日', res.data);
+                    console.log('今日', res.data);
                     this.count = result;
                 });
             }

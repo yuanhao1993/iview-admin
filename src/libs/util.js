@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 let util = {};
 util.title = function (title) {
-    title = title || 'iView admin';
+    title = title || '云狐风控';
     window.document.title = title;
 };
 export let ajaxUrl = '';

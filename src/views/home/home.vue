@@ -1,13 +1,16 @@
 <style lang="less">
     @import "./home.less";
     @import "../../styles/common.less";
+    .user-infor{
+        height:70px;
+    }
 </style>
 <template>
     <div class="home-main">
         <Row :gutter="10">
             <Col :md="24" :lg="8">
                 <Row class-name="home-page-row1" :gutter="10">
-                    <Col :md="12" :lg="24" :style="{marginBottom: '10px'}">
+                    <Col :md="12" :lg="24" :style="{margin: '15px 0'}">
                         <Card>
                             <Row type="flex" class="user-infor">
                                 <Col span="8">
@@ -24,15 +27,15 @@
                                     </Row>
                                 </Col>
                             </Row>
-                            <div class="line-gray"></div>
-                            <Row class="margin-top-8">
-                                <Col span="8"><p class="notwrap">上次登录时间:</p></Col>
-                                <Col span="16" class="padding-left-8">2017.09.12-13:32:20</Col>
-                            </Row>
-                            <Row class="margin-top-8">
-                                <Col span="8"><p class="notwrap">上次登录地点:</p></Col>
-                                <Col span="16" class="padding-left-8">北京</Col>
-                            </Row>
+                            <!--<div class="line-gray"></div>-->
+                            <!--<Row class="margin-top-8">-->
+                                <!--<Col span="8"><p class="notwrap">上次登录时间:</p></Col>-->
+                                <!--<Col span="16" class="padding-left-8">2017.09.12-13:32:20</Col>-->
+                            <!--</Row>-->
+                            <!--<Row class="margin-top-8">-->
+                                <!--<Col span="8"><p class="notwrap">上次登录地点:</p></Col>-->
+                                <!--<Col span="16" class="padding-left-8">北京</Col>-->
+                            <!--</Row>-->
                         </Card>
                     </Col>
                     <!--<Col :md="12" :lg="24" :style="{marginBottom: '10px'}">-->
@@ -68,38 +71,38 @@
             </Col>
             <Col :md="24" :lg="16">
                 <Row :gutter="5">
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
                             id-name="user_created_count"
-                            :end-val="count.createUser"
+                            :end-val = "count.register"
                             iconType="android-person-add"
                             color="#2d8cf0"
                             intro-text="今日注册用户"
                         ></infor-card>
                     </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
                             id-name="visit_count"
-                            :end-val="count.visit"
+                            :end-val = "count.authentication"
                             iconType="ios-eye"
                             color="#64d572"
                             :iconSize="50"
                             intro-text="今日认证用户"
                         ></infor-card>
                     </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
                             id-name="collection_count"
-                            :end-val="count.collection"
+                            :end-val = "count.loan"
                             iconType="upload"
                             color="#ffd572"
                             intro-text="今日放款用户"
                         ></infor-card>
                     </Col>
-                    <Col :xs="24" :sm="12" :md="6" :style="{marginBottom: '10px'}">
+                    <Col :xs="24" :sm="12" :md="6" :style="{margin: '15px 0'}">
                         <infor-card
                             id-name="transfer_count"
-                            :end-val="count.transfer"
+                            :end-val = "count.overdue"
                             iconType="shuffle"
                             color="#f25e43"
                             intro-text="今日逾期用户"
@@ -127,7 +130,7 @@
             </Col>
         </Row>
         <Row :gutter="10" class="margin-top-10">
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+            <Col :md="24" :lg="8" :style="{margin: '15px 0'}">
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="android-map"></Icon>
@@ -138,7 +141,7 @@
                     </div>
                 </Card>
             </Col>
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
+            <Col :md="24" :lg="8" :style="{margin: '15px 0'}">
                 <Card>
                     <p slot="title" class="card-title">
                         <Icon type="ios-pulse-strong"></Icon>
@@ -149,61 +152,75 @@
                     </div>
                 </Card>
             </Col>
-            <Col :md="24" :lg="8">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-wifi"></Icon>
-                        客户总量统计
-                    </p>
-                    <div class="data-source-row">
-                        <user-flow></user-flow>
-                    </div>
-                </Card>
+            <!--<Col :md="24" :lg="8">-->
+                <!--<Card>-->
+                    <!--<p slot="title" class="card-title">-->
+                        <!--<Icon type="android-wifi"></Icon>-->
+                        <!--客户总量统计-->
+                    <!--</p>-->
+                    <!--<div class="data-source-row">-->
+                        <!--<user-flow></user-flow>-->
+                    <!--</div>-->
+                <!--</Card>-->
+            <!--</Col>-->
+            <Col :md="24" :lg="8" :style="{margin: '15px 0'}">
+            <Card>
+                <p slot="title" class="card-title">
+                    <Icon type="ios-pulse-strong"></Icon>
+                    客户状态统计
+                </p>
+                <div class="data-source-row">
+                    <customer-state></customer-state>
+                </div>
+            </Card>
             </Col>
         </Row>
-        <Row :gutter="10" class="margin-top-10">
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-map"></Icon>
-                        上周每日放款量统计
-                    </p>
-                    <div class="data-source-row">
-                        <out-volume></out-volume>
-                    </div>
-                </Card>
-            </Col>
-            <Col :md="24" :lg="8" :style="{marginBottom: '10px'}">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="ios-pulse-strong"></Icon>
-                        客户状态统计
-                    </p>
-                    <div class="data-source-row">
-                        <customer-state></customer-state>
-                    </div>
-                </Card>
-            </Col>
-            <Col :md="24" :lg="8">
-                <Card>
-                    <p slot="title" class="card-title">
-                        <Icon type="android-wifi"></Icon>
-                        逾期客户统计
-                    </p>
-                    <div class="data-source-row">
-                        <out-customer></out-customer>
-                    </div>
-                </Card>
-            </Col>
-        </Row>
+        <!--<Row :gutter="10" class="margin-top-10">-->
+            <!--<Col :md="24" :lg="8" :style="{marginBottom: '10px'}">-->
+                <!--<Card>-->
+                    <!--<p slot="title" class="card-title">-->
+                        <!--<Icon type="android-map"></Icon>-->
+                        <!--上周每日放款量统计-->
+                    <!--</p>-->
+                    <!--<div class="data-source-row">-->
+                        <!--<out-volume></out-volume>-->
+                    <!--</div>-->
+                <!--</Card>-->
+            <!--</Col>-->
+            <!--<Col :md="24" :lg="8" :style="{marginBottom: '10px'}">-->
+                <!--<Card>-->
+                    <!--<p slot="title" class="card-title">-->
+                        <!--<Icon type="ios-pulse-strong"></Icon>-->
+                        <!--客户状态统计-->
+                    <!--</p>-->
+                    <!--<div class="data-source-row">-->
+                        <!--<customer-state></customer-state>-->
+                    <!--</div>-->
+                <!--</Card>-->
+            <!--</Col>-->
+            <!--<Col :md="24" :lg="8">-->
+                <!--<Card>-->
+                    <!--<p slot="title" class="card-title">-->
+                        <!--<Icon type="android-wifi"></Icon>-->
+                        <!--逾期客户统计-->
+                    <!--</p>-->
+                    <!--<div class="data-source-row">-->
+                        <!--<out-customer></out-customer>-->
+                    <!--</div>-->
+                <!--</Card>-->
+            <!--</Col>-->
+        <!--</Row>-->
         <Row class="margin-top-10">
             <Card>
                 <p slot="title" class="card-title">
                     <Icon type="ios-shuffle-strong"></Icon>
-                    上周每日客户详情
+                    客户消费详情
                 </p>
+                <div>
+                    <customer-expense-table></customer-expense-table>
+                </div>
                 <div class="line-chart-con">
-                    <service-requests></service-requests>
+                    <!--<service-requests></service-requests>-->
                 </div>
             </Card>
         </Row>
@@ -225,10 +242,14 @@ import OutVolume from './components/outVolume';
 import CustomerState from './components/customerState';
 import OutCustomer from './components/outCustomer';
 
+import {statusAnalysisToday, channelAnalysis} from '@/api/home';
+import CustomerExpenseTable from './components/customExpense.vue'
+
 export default {
     name: 'home',
     components: {
-        OutCustomer,
+      CustomerExpenseTable,
+      OutCustomer,
         CustomerState,
         OutVolume,
         homeMap,
@@ -261,15 +282,18 @@ export default {
                 }
             ],
             count: {
-                createUser: 496,
-                visit: 3264,
-                collection: 24389305,
-                transfer: 39503498
+                register: 1,
+                authentication: 1,
+                loan: 1,
+                overdue: 1
             },
             cityData: cityData,
             showAddNewTodo: false,
             newToDoItemValue: ''
         };
+    },
+    created() {
+        this.getlist();
     },
     computed: {
         avatorPath () {
@@ -296,6 +320,13 @@ export default {
         cancelAdd () {
             this.showAddNewTodo = false;
             this.newToDoItemValue = '';
+        },
+        getlist() {
+            statusAnalysisToday().then(res => {
+                let result = res.data;
+                //console.log('今日', res.data);
+                this.count = result;
+            });
         }
     }
 };

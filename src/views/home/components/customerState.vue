@@ -4,17 +4,30 @@
 
 <script>
 import echarts from 'echarts';
+import {customerStatus} from '@/api/home';
 
 export default {
     name: 'customerState',
     data () {
         return {
-            //
+            option: {},
+            customerState: ''
         };
     },
+    methods: {
+        getlist() {
+            customerStatus().then(res => {
+                let result = res.data;
+                //console.log('客户状态', res.data);
+                this.option.series[0].data = result;
+                this.customerState.setOption(this.option);
+            });
+        }
+    },
     mounted () {
+        this.getlist();
         this.$nextTick(() => {
-            var customerState = echarts.init(document.getElementById('customer_state_con'));
+            this.customerState = echarts.init(document.getElementById('customer_state_con'));
             const option = {
                 tooltip: {
                     trigger: 'item',
@@ -22,7 +35,7 @@ export default {
                 },
                 legend: {
                     orient: 'vertical',
-                    left: 'right',
+                    left: 'right'
                     // data: ['待审核', '拒绝受理', '审核通过', '需要复审', '已放款','续清','结清','逾期','催收','催收结清']
                 },
                 series: [
@@ -31,18 +44,7 @@ export default {
                         type: 'pie',
                         radius: '66%',
                         center: ['50%', '60%'],
-                        data: [
-                            {value: 2013336, name: '待审核', itemStyle: {normal: {color: '#9bd598'}}},
-                            {value: 1305923, name: '拒绝受理', itemStyle: {normal: {color: '#ffd58f'}}},
-                            {value: 543250, name: '审核通过', itemStyle: {normal: {color: '#abd5f2'}}},
-                            {value: 798403, name: '需要复审', itemStyle: {normal: {color: '#ab8df2'}}},
-                            {value: 302340, name: '已放款', itemStyle: {normal: {color: '#e14f60'}}},
-                            {value: 2013336, name: '续清', itemStyle: {normal: {color: '#9b5559'}}},
-                            {value: 1305923, name: '结清', itemStyle: {normal: {color: '#ffd51f'}}},
-                            {value: 543250, name: '逾期', itemStyle: {normal: {color: '#abd5b2'}}},
-                            {value: 798403, name: '催收', itemStyle: {normal: {color: '#bb8f12'}}},
-                            {value: 798403, name: '催收结清', itemStyle: {normal: {color: '#ab8da2'}}},
-                        ],
+                        data: [],
                         itemStyle: {
                             emphasis: {
                                 shadowBlur: 10,
@@ -53,11 +55,13 @@ export default {
                     }
                 ]
             };
-            customerState.setOption(option);
+            this.option = option;
             window.addEventListener('resize', function () {
-                customerState.resize();
+                this.customerState.resize();
             });
+
         });
     }
+
 };
 </script>

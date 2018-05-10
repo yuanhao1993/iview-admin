@@ -8,6 +8,7 @@
                 ok-text="提交"
                 :loading="submitAuditMsgLoadding"
                 cancel-text="关闭"
+                @on-cancel="cancel"
                 class="audit-modal"
         >
             <div class="audit-modal__status">
@@ -52,11 +53,6 @@
                     </i-col>
                 </Row>
             </div>
-
-            <div slot="footer">
-                <Button type="primary" size="large" :loading="submitAuditMsgLoadding" @click="submitAuditMsg">提交审核
-                </Button>
-            </div>
         </Modal>
     </div>
 </template>
@@ -64,6 +60,7 @@
 <script>
     export default {
         name: 'auditCustomer',
+        props: ['showModal'],
         data() {
             return {
                 showModal: false,
@@ -80,6 +77,40 @@
                 next_user: null,
                 backListNote: ''
             };
+        },
+        methods: {
+            submitAuditMsg() {
+                if (this.note === '') {
+                    this.$Message.warning('您的笔记还没写喔~~赶紧去写笔记吧');
+                    this.submitAuditMsgLoadding = false;
+                    return null;
+                }
+                if (this.next_user === null && this.audit_status !== 2) {
+                    this.$Message.warning('您还没有指定下一个人呢!');
+                    this.submitAuditMsgLoadding = false;
+                    return null;
+                }
+                let data = {
+                    audit_status: this.audit_status,
+                    note: this.note
+                };
+                if (this.audit_status !== 2) {
+                    Object.assign(data, {
+                        next_user: this.next_user
+                    });
+                }
+                update(this.id, data)
+                    .then(res => {
+                        this.showAuditModal = false;
+                        this.$Notice.success({
+                            title: '操作成功',
+                            desc: '您已经成功完成对该用户的信息审核'
+                        });
+                    });
+            },
+            cancel() {
+                this.$emit('cancelBlack');
+            }
         }
     };
 </script>

@@ -173,7 +173,7 @@ export const appRouter = [
         icon: 'ios-filing',
         title: '审核管理',
         name: 'customeraudit-list',
-        access: 0,
+        access: [0,1],
         component: Main,
         children: [
             {
@@ -189,7 +189,7 @@ export const appRouter = [
         icon: 'social-usd',
         title: '放款管理',
         name: 'customerloan-list',
-        access: 0,
+        access: [0,2],
         component: Main,
         children: [
             {
@@ -205,7 +205,7 @@ export const appRouter = [
         icon: 'social-usd-outline',
         title: '追款管理',
         name: 'customerurge-list',
-        access: 0,
+        access: [0,3],
         component: Main,
         children: [
             {

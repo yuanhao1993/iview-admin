@@ -55,9 +55,9 @@ export default {
                 ]
             };
             this.option = option;
-            window.addEventListener('resize', function () {
-                this.dataSourcePie.resize();
-            });
+//            window.addEventListener('resize', function () {
+//                this.dataSourcePie.resize();
+//            });
         });
     }
 };

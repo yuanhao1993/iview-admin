@@ -18,10 +18,10 @@
             getlist() {
                 expensemodel().then(res => {
                     let result = res.data;
+                    console.log(result);
                     this.option.series[0].data = result.series;
                     this.option.xAxis.data = result.data;
                     this.visiteVolume.setOption(this.option);
-                    window.onresize = this.visiteVolume.resize;
                 });
             }
         },
@@ -74,9 +74,9 @@
                 this.option = option;
                 // visiteVolume.setOption(option);
 
-                // window.addEventListener('resize', function () {
-                //     this.visiteVolume.resize();
-                // });
+//                window.addEventListener('resize', function () {
+//                    this.visiteVolume.resize();
+//                });
             });
         }
     };

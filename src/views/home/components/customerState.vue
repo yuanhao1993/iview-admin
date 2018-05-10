@@ -18,9 +18,9 @@ export default {
         getlist() {
             customerStatus().then(res => {
                 let result = res.data;
+                //console.log('客户状态', res.data);
                 this.option.series[0].data = result;
                 this.customerState.setOption(this.option);
-                window.onresize = this.visiteVolume.resize;
             });
         }
     },
@@ -56,6 +56,9 @@ export default {
                 ]
             };
             this.option = option;
+//            window.addEventListener('resize', function () {
+//                this.customerState.resize();
+//            });
 
         });
     }

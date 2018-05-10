@@ -40,7 +40,7 @@
 <script>
     import Cookies from 'js-cookie';
     import {login} from '@/api/user';
-    import department from '@/libs/util.js';
+    import {department} from '@/libs/util';
 
     export default {
         data: function () {

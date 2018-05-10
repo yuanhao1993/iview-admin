@@ -142,7 +142,7 @@
 
     import {statusAnalysisToday} from '@/api/home';
     import CustomerExpenseTable from './components/customExpense.vue';
-    import {Cookies} from 'js-cookie';
+    import Cookies from 'js-cookie';
 
     export default {
         name: 'home',
@@ -175,7 +175,6 @@
         },
         created() {
             this.getlist();
-            this.init();
         },
         computed: {
             avatorPath() {
@@ -187,8 +186,6 @@
         },
         methods: {
             init() {
-                console.log("------------------------------");
-                console.log(Cookies.get('userName'));
                 this.userName = Cookies.get('userName');
                 this.department = Cookies.get('department');
             },

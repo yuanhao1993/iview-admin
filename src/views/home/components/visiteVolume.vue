@@ -16,8 +16,8 @@ export default {
     methods: {
         getlist() {
             expensemodel().then(res => {
-                let result = res.data;
-                //console.log('客户消费量', res.data);
+                let result = res.data.series;
+                console.log('客户消费量', res.data.data);
                 this.option.series[0].data = result;
                 this.visiteVolume.setOption(this.option);
             });
@@ -56,7 +56,7 @@ export default {
                 },
                 xAxis: {
                     type: 'category',
-                    data: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+                    data: ['孔令康', '陈虹', '陈虹哈哈', '哎呀妈'],
                     nameTextStyle: {
                         color: '#c3c3c3'
                     }
@@ -73,9 +73,9 @@ export default {
             // visiteVolume.setOption(option);
 
             window.addEventListener('resize', function () {
-                this.visiteVolume.resize();
+                visiteVolume.resize();
             });
         });
-    }
+    },
 };
 </script>

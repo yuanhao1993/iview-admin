@@ -65,30 +65,11 @@
 </style>
 <template>
     <div class="customer-desc">
-        <customer-detail :id="customer"></customer-detail>
-        <div class="fix-button-group">
-            <i-button class="button" type="primary" @click="showAuditModal=true">审核</i-button>
-            <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
-        </div>
-
-        <!--审核模态框-->
-        <add-black
-                :showBackListModal="showBackListModal"
-                :backListNote="backListNote"
-                :id="id"
-                v-on:cancelBlack="cancelBlack"
-                v-on:baclkCommit="baclkCommit"
-        ></add-black>
-        <audit-customer
-                :showModal="showAuditModal"
-                v-on:cancelBlack="cancelBlack"
-        ></audit-customer>
+        <customer-detail :id="id"></customer-detail>
     </div>
 </template>
 
 <script>
-    import {loadCustomerById} from '@/api/customer';
-    import {loadById, fetchUserList, update} from '@/api/customeraudit';
     import customerDetail from '@/views/customer/components/customerDetail';
     import AddBlack from '../customer/components/addBlack';
     import AuditCustomer from '../customer/components/auditCustomer';
@@ -96,9 +77,7 @@
     export default {
         data() {
             return {
-                showAuditModal: false,
-                showBackListModal: false,
-                customer: this.id,
+                id: this.id,
                 backListNote: ''
             };
         },
@@ -110,36 +89,10 @@
         },
         computed: {},
         methods: {
-            cancelBlack() {
-                this.showBackListModal = false;
-                this.showAuditModal = false;
-            },
-            baclkCommit() {
-                this.$Message.info('成功加入黑名单');
-                this.showBackListModal = false;
-            },
-            audit() {
-                this.showAuditModal = true;
-            }
         },
         mounted() {
-            this.showBackListModal = false;
-            this.showAuditModal = false;
         },
         created() {
-            loadCustomerById(this.id)
-                .then(res => {
-                    this.customer = res.data;
-                    this.backListNote = this.customer.blcak_reason;
-                });
-            loadById(this.id)
-                .then(res => {
-                    this.customeraudit = res.data;
-                });
-            fetchUserList()
-                .then(res => {
-                    this.userList = res.data.results;
-                });
         }
     };
 </script>

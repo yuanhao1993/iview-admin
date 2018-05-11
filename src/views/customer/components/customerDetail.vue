@@ -18,6 +18,25 @@
                 }
             }
         }
+        .fix-button-group {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            padding: 10px 40px;
+            .button {
+                width: 100px;
+                margin-left: 15px;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
     }
 </style>
 <template>
@@ -249,11 +268,23 @@
                 </div>
             </Tab-pane>
         </Tabs>
+        <div class="fix-button-group">
+            <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
+        </div>
+        <!--审核模态框-->
+        <add-black
+                :showBackListModal="showBackListModal"
+                :backListNote="customer.blcak_reason"
+                :id="id"
+                v-on:cancelBlack="cancelBlack"
+                v-on:baclkCommit="baclkCommit"
+        ></add-black>
     </div>
 </template>
 
 <script>
     import {loadCustomerById, fetchZxyReport} from '@/api/customer';
+    import AddBlack from './addBlack';
     // import ajaxUrl from '@/libs/util';
 
     export default {
@@ -261,14 +292,24 @@
         data() {
             return {
                 customer: null,
-                // url: `${ajaxUrl}/yunhu/customermodel/${this.id}/zxy_report/`
-                report: null
+                report: null,
+                showBackListModal: false,
+                backListNote: '',
+                id: this.id
             };
         },
         props: ['id'],
-        components: {},
+        components: {AddBlack},
         computed: {},
-        methods: {},
+        methods: {
+            cancelBlack() {
+                this.showBackListModal = false;
+            },
+            baclkCommit() {
+                this.$Message.info('成功加入黑名单');
+                this.showBackListModal = false;
+            }
+        },
         mounted() {
         },
         created() {

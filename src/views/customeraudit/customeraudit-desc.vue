@@ -67,13 +67,22 @@
     <div class="customer-desc">
         <customer-detail :id="customer"></customer-detail>
         <div class="fix-button-group">
-            <i-button class="button" type="primary" @click="showBackListModal = true">加入黑名单</i-button>
-            <i-button class="button" type="primary" @click="showAuditModal = true">审核</i-button>
+            <i-button class="button" type="primary" @click="showAuditModal=true">审核</i-button>
+            <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
         </div>
 
         <!--审核模态框-->
-
-        <add-black :addBlackModal="showBackListModal"></add-black>
+        <add-black
+                :showBackListModal="showBackListModal"
+                :backListNote="backListNote"
+                :id="id"
+                v-on:cancelBlack="cancelBlack"
+                v-on:baclkCommit="baclkCommit"
+        ></add-black>
+        <audit-customer
+                :showModal="showAuditModal"
+                v-on:cancelBlack="cancelBlack"
+        ></audit-customer>
     </div>
 </template>
 
@@ -81,70 +90,47 @@
     import {loadCustomerById} from '@/api/customer';
     import {loadById, fetchUserList, update} from '@/api/customeraudit';
     import customerDetail from '@/views/customer/components/customerDetail';
-    import AddBlack from '@/views//customer/components/addBlack';
+    import AddBlack from '../customer/components/addBlack';
+    import AuditCustomer from '../customer/components/auditCustomer';
 
     export default {
         data() {
             return {
                 showAuditModal: false,
                 showBackListModal: false,
-                submitAuditMsgLoadding: false,
                 customer: this.id,
-                customeraudit: null,
-                // 审核状态
-                audit_status: 2,
-                // 笔记
-                note: '',
-                // 用户列表
-                userList: [],
-                // 指定用户
-                next_user: null,
                 backListNote: ''
             };
         },
         props: ['id'],
         components: {
+            AuditCustomer,
             AddBlack,
             customerDetail
         },
         computed: {},
         methods: {
-            submitAuditMsg() {
-                if (this.note === '') {
-                    this.$Message.warning('您的笔记还没写喔~~赶紧去写笔记吧');
-                    this.submitAuditMsgLoadding = false;
-                    return null;
-                }
-                if (this.next_user === null && this.audit_status !== 2) {
-                    this.$Message.warning('您还没有指定下一个人呢!');
-                    this.submitAuditMsgLoadding = false;
-                    return null;
-                }
-                let data = {
-                    audit_status: this.audit_status,
-                    note: this.note
-                };
-                if (this.audit_status !== 2) {
-                    Object.assign(data, {
-                        next_user: this.next_user
-                    });
-                }
-                update(this.id, data)
-                    .then(res => {
-                        this.showAuditModal = false;
-                        this.$Notice.success({
-                            title: '操作成功',
-                            desc: '您已经成功完成对该用户的信息审核'
-                        });
-                    });
+            cancelBlack() {
+                this.showBackListModal = false;
+                this.showAuditModal = false;
+            },
+            baclkCommit() {
+                this.$Message.info('成功加入黑名单');
+                this.showBackListModal = false;
+            },
+            audit() {
+                this.showAuditModal = true;
             }
         },
         mounted() {
+            this.showBackListModal = false;
+            this.showAuditModal = false;
         },
         created() {
             loadCustomerById(this.id)
                 .then(res => {
                     this.customer = res.data;
+                    this.backListNote = this.customer.blcak_reason;
                 });
             loadById(this.id)
                 .then(res => {

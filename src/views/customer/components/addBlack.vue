@@ -1,13 +1,15 @@
 <template>
     <div class="add-black">
+
         <Modal
-                v-model="addBlackModal"
+                :value="showBackListModal"
                 title="加入黑名单"
                 width="60%"
-                @on-ok=""
+                @on-ok="baclkCommit"
                 ok-text="提交"
                 :loading="submitBackListLoadding"
                 cancel-text="关闭"
+                @on-cancel="cancel"
                 class="audit-modal"
         >
             <div class="audit-modal__conten">
@@ -24,22 +26,24 @@
                 </Row>
             </div>
 
-            <div slot="footer">
-                <Button type="primary" size="large" :loading="submitBackListLoadding" @click="submitBackList">加入黑名单
-                </Button>
-            </div>
+            <!--<div slot="footer">-->
+            <!--<Button type="primary" size="large" :loading="submitBackListLoadding" @click="submitBackList">加入黑名单-->
+            <!--</Button>-->
+            <!--</div>-->
         </Modal>
     </div>
 </template>
 
 <script>
+    import {customerModelPatch} from '@/api/customer';
+
     export default {
         name: 'addBlack',
-        props: ['addBlackModal'],
+        props: ['showBackListModal', 'backListNote', 'id'],
         data() {
             return {
-                addBlackModal: false,
-                submitBackListLoadding: true
+                submitBackListLoadding: false,
+                backListNote: this.backListNote
             };
         },
         methods: {
@@ -49,6 +53,16 @@
                     this.submitBackListLoadding = false;
                     return null;
                 }
+            },
+            cancel() {
+                this.$emit('cancelBlack');
+            },
+            baclkCommit() {
+                customerModelPatch(this.id, {'blcak_reason': this.backListNote, 'is_black': true}).then(
+                    res => {
+                        this.$emit('baclkCommit');
+                    }
+                );
             }
         }
     };

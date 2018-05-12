@@ -38,6 +38,11 @@
             }
         }
     }
+    .audit{
+        /*background: #ffffff;*/
+        //padding:5px;
+        margin-top: -250px;
+    }
 </style>
 <template>
     <div class="customer-desc">
@@ -268,10 +273,14 @@
                 </div>
             </Tab-pane>
         </Tabs>
+        <!--审核000-->
+        <div class="audit">
+           <audit-customer :Status="customerStatus"></audit-customer>
+        </div>
         <div class="fix-button-group">
             <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
         </div>
-        <!--审核模态框-->
+        <!--加入黑名单模态框-->
         <add-black
                 :showBackListModal="showBackListModal"
                 :backListNote="customer.blcak_reason"
@@ -283,14 +292,21 @@
 </template>
 
 <script>
+    import {customerStatus, customerAuditStatus, customerLoanStatus, customerUrgeStatus, department} from '@/libs/util';
     import {loadCustomerById, fetchZxyReport} from '@/api/customer';
     import AddBlack from './addBlack';
-    // import ajaxUrl from '@/libs/util';
+    import AuditCustomer from './auditCustomer.vue'
+//     import ajaxUrl from '@/libs/util';
 
     export default {
         name: 'customerDetail',
         data() {
             return {
+                customerStatus: customerStatus,
+                customerAuditStatus: customerAuditStatus,
+                customerLoanStatus: customerLoanStatus,
+                customerUrgeStatus: customerUrgeStatus,
+                department: department,
                 customer: null,
                 report: null,
                 showBackListModal: false,
@@ -299,7 +315,9 @@
             };
         },
         props: ['id'],
-        components: {AddBlack},
+        components: {
+            AuditCustomer,
+            AddBlack},
         computed: {},
         methods: {
             cancelBlack() {

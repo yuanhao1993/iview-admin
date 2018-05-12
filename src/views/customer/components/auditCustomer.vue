@@ -1,33 +1,19 @@
+<style>
+    .audit-customer {
+        padding: 25px;
+        .audit-modal__conten{
+          margin-top: 25px;
+        }
+    }
+</style>
 <template>
     <div class="audit-customer">
-        <Modal
-                v-model="showModal"
-                title="客户审核"
-                width="60%"
-                @on-ok=""
-                ok-text="提交"
-                :loading="submitAuditMsgLoadding"
-                cancel-text="关闭"
-                @on-cancel="cancel"
-                class="audit-modal"
-        >
             <div class="audit-modal__status">
-                <RadioGroup v-model="audit_status">
-                    <Radio :label="2">
-                        <Icon type="social-apple"></Icon>
-                        <span>拒绝受理</span>
-                    </Radio>
-                    <Radio :label="3">
-                        <Icon type="social-android"></Icon>
-                        <span>审核通过</span>
-                    </Radio>
-                    <Radio :label="4">
-                        <Icon type="social-android"></Icon>
-                        <span>需要复审</span>
-                    </Radio>
-                </RadioGroup>
+                <Select v-model="audit_status" style="width:200px">
+                    <Option v-for="item in auditStatus" :value="item.value" :key="item.value">{{ item.value }}</Option>
+                </Select>
             </div>
-            <div class="audit-modal__conten">
+            <div class="audit-modal__conten" style="margin-top:50px">
                 <Row :gutter="15">
                     <i-col :span="audit_status == 2 ? 24 : 16" class="audit-modal__content__note">
                         <Card>
@@ -53,14 +39,15 @@
                     </i-col>
                 </Row>
             </div>
-        </Modal>
     </div>
 </template>
 
 <script>
+
+
     export default {
         name: 'auditCustomer',
-        props: ['showModal'],
+        //props: ['showModal'],
         data() {
             return {
                 showModal: false,
@@ -72,11 +59,46 @@
                 // 笔记
                 note: '',
                 // 用户列表
-                userList: [],
+                userList: [
+                    {
+                        value: '管理员',
+                        label: 0
+                    },
+                    {
+                        value: '审核部',
+                        label: 1
+                    },
+                    {
+                        value: '需要复审',
+                        label: 2
+                    },
+                    {
+                        value: '需要复审',
+                        label: 3
+                    }
+                ],
                 // 指定用户
                 next_user: null,
-                backListNote: ''
+                backListNote: '',
+                status: '',
+                auditStatus: [
+                    {
+                        value: '拒绝受理',
+                        label: 2
+                    },
+                    {
+                        value: '审核通过',
+                        label: 3
+                    },
+                    {
+                        value: '需要复审',
+                        label: 4
+                    }
+                ]
             };
+        },
+        created() {
+            console.log('120', customerStatus);
         },
         methods: {
             submitAuditMsg() {

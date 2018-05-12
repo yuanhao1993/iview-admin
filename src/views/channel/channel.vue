@@ -223,6 +223,7 @@
                             check_ways: checkWays.join(', ')
                         };
                     });
+                    console.log('11', result);
                     this.dataList = result;
                     this.total = res.data.count;
                     this.dataLoading = false;

@@ -21,10 +21,14 @@
 <template>
     <div class="customermodel" ref="channel">
         <Row type="flex" class="search">
-            <i-col span="8" ref="search" type="flex" justify="start">
-                <Input v-model="searchText" placeholder="姓名..." style="width: 60%"/>
+            <col span="8" ref="search" type="flex" justify="start">
+                <Input v-model="searchText" placeholder="姓名..." style="width: 30%"/>
                 <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
-            </i-col>
+            </col>
+            <Col span="12" style="margin-left: 15px">
+              <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>
+              <i-button type="default" icon="ios-search">时间段筛选</i-button>
+            </Col>
         </Row>
 
         <Table class="table"
@@ -267,7 +271,7 @@
             }
         },
         mounted() {
-            this.tableHeight = this.$refs.channel.clientHeight - this.$refs.page.clientHeight - this.$refs.search.clientHeight;
+            //this.tableHeight = this.$refs.channel.clientHeight - this.$refs.page.clientHeight - this.$refs.search.clientHeight;
         }
     };
 </script>

@@ -215,7 +215,23 @@ export const appRouter = [
                 component: () => import('@/views/customerurge/customerurge.vue')
             }
         ]
-    }
+    },
+    {
+        path: '/black-list',
+        icon: 'filing',
+        title: '黑名单',
+        name: 'black-list',
+        access: 0,
+        component: Main,
+        children: [
+          {
+            path: 'index',
+            title: '黑名单',
+            name: 'black_index',
+            component: () => import('@/views/black/black.vue')
+          }
+        ]
+    },
 ];
 
 // 所有上面定义的路由都要写在下面的routers里

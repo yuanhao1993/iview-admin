@@ -161,10 +161,6 @@
                 department: ''
             };
         },
-//        created() {
-//            this.getlist();
-//            this.init();
-//        },
         computed: {
             avatorPath() {
                 return localStorage.avatorImgPath;
@@ -183,7 +179,6 @@
             getlist() {
                 statusAnalysisToday().then(res => {
                     let result = res.data;
-                    console.log('今日', res.data);
                     this.count = result;
                 });
             }

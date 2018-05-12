@@ -18,7 +18,7 @@
             getlist() {
                 expensemodel().then(res => {
                     let result = res.data;
-                    console.log(result);
+                    //console.log(result);
                     this.option.series[0].data = result.series;
                     this.option.xAxis.data = result.data;
                     this.visiteVolume.setOption(this.option);

@@ -78,6 +78,10 @@
                         key: 'address'
                     },
                     {
+                        title: '身份证号',
+                        key: 'identity'
+                    },
+                    {
                         title: '芝麻分',
                         key: 'zhima_score'
                     },
@@ -86,20 +90,8 @@
                         key: 'channel__name'
                     },
                     {
-                        title: '审核人',
-                        key: 'audit_user'
-                    },
-                    {
-                        title: '贷款人',
-                        key: 'loan_user'
-                    },
-                    {
-                        title: '追款人',
-                        key: 'urge_user'
-                    },
-                    {
-                        title: '地区',
-                        key: 'zone'
+                        title: '加入黑名单原因',
+                        key: 'blcak_reason'
                     },
                     {
                         title: '操作',
@@ -156,8 +148,8 @@
                             urge_user: urgeUser
                         };
                     });
-                    console.log('黑名单', res.data.results);
-                    this.dataList = result;
+//                    console.log('黑名单', res.data.results);
+//                    this.dataList = result;
                     this.total = res.data.count;
                     this.dataLoading = false;
                 }).catch();
@@ -170,7 +162,6 @@
                     title: '提示',
                     content: '<p>您确定要将该人移除黑名单？</p>',
                     onOk: () => {
-                        console.log('id', id);
                         outCurrt(id, {'black_reason': '移除黑名单', 'is_black': false}).then(res => {
                             this.getlist();
                             this.$Notice.success({

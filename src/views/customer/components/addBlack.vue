@@ -59,7 +59,7 @@
             },
             baclkCommit() {
                 console.log(this.id);
-                customerModelPatch(this.id, {'black_reason': this.backListNote, 'is_black': true}).then(
+                customerModelPatch(this.id, {'blcak_reason': this.backListNote, 'is_black': true}).then(
                     res => {
                         this.$emit('baclkCommit');
                     }

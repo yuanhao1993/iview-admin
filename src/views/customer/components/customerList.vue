@@ -25,10 +25,10 @@
                 <Input v-model="searchText" placeholder="姓名..." style="width: 30%"/>
                 <i-button @click="getlist" type="default" icon="ios-search">筛选</i-button>
             </col>
-            <Col span="12" style="margin-left: 15px">
-              <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>
-              <i-button type="default" icon="ios-search">时间段筛选</i-button>
-            </Col>
+            <!--<Col span="12" style="margin-left: 15px">-->
+              <!--<DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>-->
+              <!--<i-button type="default" icon="ios-search">时间段筛选</i-button>-->
+            <!--</Col>-->
         </Row>
 
         <Table class="table"

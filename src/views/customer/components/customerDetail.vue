@@ -292,7 +292,6 @@
 </template>
 
 <script>
-    import {customerStatus, customerAuditStatus, customerLoanStatus, customerUrgeStatus, department} from '@/libs/util';
     import {loadCustomerById, fetchZxyReport} from '@/api/customer';
     import AddBlack from './addBlack';
     import AuditCustomer from './auditCustomer.vue'
@@ -302,11 +301,6 @@
         name: 'customerDetail',
         data() {
             return {
-                customerStatus: customerStatus,
-                customerAuditStatus: customerAuditStatus,
-                customerLoanStatus: customerLoanStatus,
-                customerUrgeStatus: customerUrgeStatus,
-                department: department,
                 customer: null,
                 report: null,
                 showBackListModal: false,

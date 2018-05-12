@@ -71,28 +71,18 @@
 
 <script>
     import customerDetail from '@/views/customer/components/customerDetail';
-    import AddBlack from '../customer/components/addBlack';
-    import AuditCustomer from '../customer/components/auditCustomer';
 
     export default {
+        components: {
+            customerDetail
+        },
         data() {
             return {
-                id: this.id,
-                backListNote: ''
+                id: this.id
             };
         },
         props: ['id'],
-        components: {
-            AuditCustomer,
-            AddBlack,
-            customerDetail
-        },
         computed: {},
-        methods: {
-        },
-        mounted() {
-        },
-        created() {
-        }
+        methods: {}
     };
 </script>

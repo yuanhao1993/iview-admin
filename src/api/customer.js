@@ -77,30 +77,11 @@ export function customerModelPatch(id, data) {
 }
 
 // 客户审核api
-export function customerAuditPatch(id, data) {
+export function customerAuditPost(id, data) {
     return request({
-        url: `/yunhu/customeraudit/${id}/`,
-        method: 'patch',
+        url: `/yunhu/customermodel/${id}/audit/`,
+        method: 'post',
         data: data
     });
 }
 
-export function customerAuditList(params) {
-    return request({
-        url: '/yunhu/customeraudit/',
-        method: 'get',
-        params
-    });
-}
-
-export function customerAuditDetail(id) {
-    return request({
-        url: `/yunhu/customeraudit/${id}/`,
-        method: 'get',
-        params: {
-            limit: '',
-            offset: '',
-            search: ''
-        }
-    });
-}

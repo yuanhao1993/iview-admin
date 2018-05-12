@@ -268,6 +268,7 @@
                 </div>
             </Tab-pane>
         </Tabs>
+        <audit-customer :id="id"></audit-customer>
         <div class="fix-button-group">
             <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
         </div>
@@ -285,6 +286,7 @@
 <script>
     import {loadCustomerById, fetchZxyReport} from '@/api/customer';
     import AddBlack from './addBlack';
+    import AuditCustomer from './auditCustomer';
     // import ajaxUrl from '@/libs/util';
 
     export default {
@@ -299,7 +301,7 @@
             };
         },
         props: ['id'],
-        components: {AddBlack},
+        components: {AuditCustomer, AddBlack},
         computed: {},
         methods: {
             cancelBlack() {

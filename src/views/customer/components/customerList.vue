@@ -152,7 +152,7 @@
                     },
                     {
                         title: '申请时间',
-                        key: 'zhima_score'
+                        key: 'create_time'
                     },
                     {
                         title: '操作',

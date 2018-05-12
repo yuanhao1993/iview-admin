@@ -221,7 +221,6 @@ export const appRouter = [
         icon: 'filing',
         title: '黑名单',
         name: 'black-list',
-        access: 0,
         component: Main,
         children: [
           {

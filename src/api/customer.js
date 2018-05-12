@@ -60,10 +60,11 @@ export function deleteChannel(id) {
     });
 }
 
-export function fetchZxyReport(id) {
+export function fetchZxyReport(id,params) {
     return request({
         url: `/yunhu/customermodel/${id}/zxy_report/`,
-        method: 'get'
+        method: 'get',
+        params
     });
 }
 

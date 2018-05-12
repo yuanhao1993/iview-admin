@@ -37,11 +37,15 @@
                 }
             }
         }
+        .audit-cont{
+            margin-top: -15%;
+            margin-bottom: 15%;
+        }
     }
 </style>
 <template>
     <div class="customer-desc">
-        <Tabs class="customer-desc__tabs">
+        <Tabs class="customer-desc__tabs" :value="tabName" >
             <Tab-pane label="客户基本信息" icon="social-apple">
                 <Row :gutter="15">
                     <i-col :span="9">
@@ -258,7 +262,8 @@
                     </i-col>
                 </Row>
             </Tab-pane>
-            <Tab-pane label="咨询云报告" icon="social-tux">
+            <Tab-pane label="咨询云报告" icon="social-tux"
+                      @click="show">
                 <iframe v-bind:srcdoc="report" width="100%" height="100%" frameborder="0">
                 </iframe>
             </Tab-pane>
@@ -268,11 +273,15 @@
                 </div>
             </Tab-pane>
         </Tabs>
-        <audit-customer :id="id"></audit-customer>
+        <div class="audit-cont">
+            <audit-customer :id="id"></audit-customer>
+        </div>
+
         <div class="fix-button-group">
+            <i-button class="button" type="primary" v-if="showReport"  @click="scrapyReport">采集资信云报告</i-button>
             <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
         </div>
-        <!--审核模态框-->
+        <!--加入黑名单模态框-->
         <add-black
                 :showBackListModal="showBackListModal"
                 :backListNote="customer.blcak_reason"
@@ -297,7 +306,9 @@
                 report: null,
                 showBackListModal: false,
                 backListNote: '',
-                id: this.id
+                id: this.id,
+                tabName: '客户基本信息',
+                showReport: true
             };
         },
         props: ['id'],
@@ -310,6 +321,24 @@
             baclkCommit() {
                 this.$Message.info('成功加入黑名单');
                 this.showBackListModal = false;
+            },
+            show() {
+                console.log('0000', this.showReport);
+                this.showReport = true;
+            },
+            scrapyReport() {
+                this.$Modal.confirm({
+                    title: '采集确认',
+                    content: '<p>采集报告将扣除3个智能豆</p>',
+                    onOk: () => {
+                        fetchZxyReport(this.id, {scrapy: true}).then(res => {
+                            this.report = res.data;
+                        });
+                    },
+                    onCancel: () => {
+                        this.$Message.info('Clicked cancel');
+                    }
+                });
             }
         },
         mounted() {

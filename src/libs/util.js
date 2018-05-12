@@ -16,7 +16,7 @@ if (env === 'development') {
 } else {
     ajaxUrl = 'http://127.0.0.1:8080';
 }
-ajaxUrl = 'http://127.0.0.1:8000';
+// ajaxUrl = 'http://127.0.0.1:8000';
 util.ajax = axios.create({
     baseURL: ajaxUrl,
     timeout: 30000
@@ -308,7 +308,7 @@ export const customerAuditStatus = {
 };
 export const customerLoanStatus = {
     2: '拒绝受理',
-    4: '需要复审',
+    // 4: '需要复审',
     5: '已放款',
     6: '续期',
     7: '结清',

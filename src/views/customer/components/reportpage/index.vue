@@ -6,7 +6,7 @@
 </style>
 <template>
     <div class="reportpage">
-
+        {{{reportMain}}
         <div id="main">
             <div class="info baseInfo">
                 <h2 class="title">基本信息</h2>
@@ -2532,21 +2532,22 @@
 
 
         </div><!--main-->
-        <!--<script src="https://credit.baiqishi.com/clweb/resources/lib/jquery-2.1.1/jquery.min.js"></script>-->
-        <!--<script src="https://credit.baiqishi.com/clweb/resources/lib/echarts/echarts.common.min.js"></script>-->
-        <!--<script src="https://credit.baiqishi.com/clweb/resources/js/reportNew.js"></script>-->
     </div>
 </template>
 
 <script>
     export default {
         data() {
-            return {};
+            return {
+                reportMain: null
+            };
         },
         components: {},
         computed: {},
         methods: {},
-        mounted() {
+        mounted() {},
+        created() {
+
         }
     };
 </script>

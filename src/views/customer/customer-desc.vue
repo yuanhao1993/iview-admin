@@ -1,6 +1,6 @@
 <template>
     <div class="customer-desc">
-        <customer-detail :id="customer"></customer-detail>
+        <customer-detail :id="id"></customer-detail>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
         },
         data() {
             return {
-                customer: this.id
+                id: this.id
             };
         },
         props: ['id'],

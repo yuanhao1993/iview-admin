@@ -18,6 +18,25 @@
                 }
             }
         }
+        .fix-button-group {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            padding: 10px 40px;
+            .button {
+                width: 100px;
+                margin-left: 15px;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
     }
 </style>
 <template>
@@ -240,7 +259,8 @@
                 </Row>
             </Tab-pane>
             <Tab-pane label="咨询云报告" icon="social-tux">
-                <reportpage></reportpage>
+                <iframe v-bind:srcdoc="report" width="100%" height="100%" frameborder="0">
+                </iframe>
             </Tab-pane>
             <Tab-pane label="反欺诈云报告" icon="social-tux">
                 <div style="margin-top: 15%;text-align: center;font-size: 20px;">
@@ -248,25 +268,48 @@
                 </div>
             </Tab-pane>
         </Tabs>
+        <div class="fix-button-group">
+            <i-button class="button" type="primary" @click="showBackListModal=true">加入黑名单</i-button>
+        </div>
+        <!--审核模态框-->
+        <add-black
+                :showBackListModal="showBackListModal"
+                :backListNote="customer.blcak_reason"
+                :id="id"
+                v-on:cancelBlack="cancelBlack"
+                v-on:baclkCommit="baclkCommit"
+        ></add-black>
     </div>
 </template>
 
 <script>
-    import {loadCustomerById} from '@/api/customer';
-    import reportpage from '@/views/customer/components/reportpage/index.vue';
+    import {loadCustomerById, fetchZxyReport} from '@/api/customer';
+    import AddBlack from './addBlack';
+    // import ajaxUrl from '@/libs/util';
+
     export default {
         name: 'customerDetail',
         data() {
             return {
-                customer: null
+                customer: null,
+                report: null,
+                showBackListModal: false,
+                backListNote: '',
+                id: this.id
             };
         },
         props: ['id'],
-        components: {
-            reportpage
-        },
+        components: {AddBlack},
         computed: {},
-        methods: {},
+        methods: {
+            cancelBlack() {
+                this.showBackListModal = false;
+            },
+            baclkCommit() {
+                this.$Message.info('成功加入黑名单');
+                this.showBackListModal = false;
+            }
+        },
         mounted() {
         },
         created() {
@@ -274,6 +317,9 @@
                 .then(res => {
                     this.customer = res.data;
                 });
+            fetchZxyReport(this.id).then(res => {
+                this.report = res.data;
+            });
         }
     };
 </script>

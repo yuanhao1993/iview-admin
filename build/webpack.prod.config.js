@@ -55,31 +55,31 @@ module.exports = merge(webpackBaseConfig, {
         //       drop_debugger: true
         //      }
         // }),
-        new CopyWebpackPlugin([
-            {
-                from: 'td_icon.ico'
-            },
-            {
-                from: 'src/styles/fonts',
-                to: 'fonts'
-            },
-            {
-                from: 'src/views/main-components/theme-switch/theme'
-            },
-            {
-                from: 'src/views/my-components/text-editor/tinymce'
-            }
-        ], {
-            ignore: [
-                'text-editor.vue'
-            ]
-        }),
+        // new CopyWebpackPlugin([
+        //     {
+        //         from: 'td_icon.png'
+        //     },
+        //     {
+        //         from: 'src/styles/fonts',
+        //         to: 'fonts'
+        //     },
+        //     {
+        //         from: 'src/views/main-components/theme-switch/theme'
+        //     },
+        //     {
+        //         from: 'src/views/my-components/text-editor/tinymce'
+        //     }
+        // ], {
+        //     ignore: [
+        //         'text-editor.vue'
+        //     ]
+        // }),
         new HtmlWebpackPlugin({
-            title: 'iView admin v' + package.version,
-            favicon: './td_icon.ico',
+            // title: 'iView admin v' + package.version,
+            // favicon: './td_icon.png',
             filename: '../index.html',
-            template: '!!ejs-loader!./src/template/index.ejs',
-            inject: false
+            // template: '!!ejs-loader!./src/template/index.ejs',
+            // inject: true
         })
     ]
 });
